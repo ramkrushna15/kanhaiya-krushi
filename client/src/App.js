@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Products from './pages/Products';
@@ -11,7 +13,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {/* <Navbar /> */}
+        <Navbar />
         <main className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -21,7 +23,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </Router>
   );

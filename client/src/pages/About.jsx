@@ -10,7 +10,7 @@ const About = () => {
       {/* Page Header */}
       <section className="page-header">
         <div className="container">
-          <h1>About AgroFarm</h1>
+          <h1>About Kanahiya Krushi</h1>
           <p>Growing together towards a sustainable future</p>
         </div>
       </section>
@@ -22,9 +22,9 @@ const About = () => {
             <div className="about-text">
               <h2>Our Story</h2>
               <p>
-                Founded in 2010, AgroFarm began with a simple mission: to provide farmers with
+                Founded with a simple mission: to provide farmers with
                 high-quality agricultural products and expert guidance. Over the years, we've grown
-                into a trusted partner for thousands of farmers across India.
+                into a trusted partner for thousands of farmers across Maharashtra and beyond.
               </p>
               <p>
                 We believe in sustainable farming practices that not only increase yields but also
@@ -96,20 +96,20 @@ const About = () => {
         <div className="container">
           <div className="stats-grid">
             <div className="stat-item">
-              <div className="stat-number">10,000+</div>
+              <div className="stat-number">5,000+</div>
               <div className="stat-label">Happy Farmers</div>
             </div>
             <div className="stat-item">
-              <div className="stat-number">500+</div>
+              <div className="stat-number">300+</div>
               <div className="stat-label">Products</div>
             </div>
             <div className="stat-item">
-              <div className="stat-number">15+</div>
+              <div className="stat-number">10+</div>
               <div className="stat-label">Years Experience</div>
             </div>
             <div className="stat-item">
-              <div className="stat-number">25+</div>
-              <div className="stat-label">States Covered</div>
+              <div className="stat-number">15+</div>
+              <div className="stat-label">Districts Covered</div>
             </div>
           </div>
         </div>

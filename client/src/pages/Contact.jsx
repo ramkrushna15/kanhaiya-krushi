@@ -157,7 +157,7 @@ const Contact = () => {
                   <div className="contact-icon">📍</div>
                   <div>
                     <h4>Address</h4>
-                    <p>123 Farm Road, Agriculture City<br />Pimpri, Maharashtra, India</p>
+                    <p>Village Kanahiya, Pimpri<br />Maharashtra, India - 411018</p>
                   </div>
                 </div>
 
@@ -165,7 +165,7 @@ const Contact = () => {
                   <div className="contact-icon">📞</div>
                   <div>
                     <h4>Phone</h4>
-                    <p>+91 12345 67890<br />+91 98765 43210</p>
+                    <p>+91 98765 43210<br />+91 87654 32109</p>
                   </div>
                 </div>
 
@@ -173,7 +173,7 @@ const Contact = () => {
                   <div className="contact-icon">✉️</div>
                   <div>
                     <h4>Email</h4>
-                    <p>info@agrofarm.com<br />support@agrofarm.com</p>
+                    <p>info@kanahiyakrushi.com<br />support@kanahiyakrushi.com</p>
                   </div>
                 </div>
 

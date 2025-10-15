@@ -42,7 +42,7 @@ const Home = () => {
       <section className="hero">
         <div className="hero-overlay"></div>
         <div className="hero-content">
-          <h1 className="hero-title">Welcome to AgroFarm</h1>
+          <h1 className="hero-title">Welcome to Kanahiya Krushi</h1>
           <p className="hero-subtitle">
             Your Trusted Partner in Sustainable Agriculture
           </p>
@@ -50,10 +50,10 @@ const Home = () => {
             Providing quality seeds, fertilizers, and expert farming solutions for a greener tomorrow
           </p>
           <div className="hero-buttons">
-            <Link to="/products" className="btn btn-primary">
+            <Link to="/products" className="btn btn-primary btn-large">
               Browse Products
             </Link>
-            <Link to="/contact" className="btn btn-outline">
+            <Link to="/contact" className="btn btn-outline btn-large">
               Contact Us
             </Link>
           </div>
@@ -63,7 +63,7 @@ const Home = () => {
       {/* Features Section */}
       <section className="section features-section">
         <div className="container">
-          <h2 className="section-title text-center">Why Choose AgroFarm?</h2>
+          <h2 className="section-title text-center">Why Choose Kanahiya Krushi?</h2>
           <div className="features-grid">
             <div className="feature-card">
               <div className="feature-icon">🌱</div>
@@ -150,7 +150,7 @@ const Home = () => {
             <div className="testimonial-card">
               <div className="testimonial-rating">⭐⭐⭐⭐⭐</div>
               <p className="testimonial-text">
-                "AgroFarm's organic seeds have significantly improved my crop yield. Highly recommended!"
+                "Kanahiya Krushi's organic seeds have significantly improved my crop yield. Highly recommended!"
               </p>
               <div className="testimonial-author">
                 <strong>Rajesh Kumar</strong>
@@ -186,7 +186,7 @@ const Home = () => {
         <div className="container text-center">
           <h2 className="cta-title">Ready to Grow with Us?</h2>
           <p className="cta-text">
-            Join thousands of farmers who trust AgroFarm for their agricultural needs
+            Join thousands of farmers who trust Kanahiya Krushi for their agricultural needs
           </p>
           <Link to="/contact" className="btn btn-primary btn-large">
             Get Started Today
