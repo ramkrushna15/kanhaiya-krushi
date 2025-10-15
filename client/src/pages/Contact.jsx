@@ -1,5 +1,5 @@
 // ==========================================
-// client/src/pages/Contact.jsx
+// client/src/pages/Contact.jsx - Complete with Working Google Maps
 // ==========================================
 import React, { useState } from 'react';
 import { submitContact } from '../services/api';
@@ -157,7 +157,15 @@ const Contact = () => {
                   <div className="contact-icon">📍</div>
                   <div>
                     <h4>Address</h4>
-                    <p>Village Kanhaiya, Pimpri<br />Maharashtra, India - 411018</p>
+                    <p>Near Market Yard, Jeur, Karmala, Solapur<br />Maharashtra, India</p>
+                    <a 
+                      href="https://maps.app.goo.gl/hvWERXEXCCTknryc8" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="map-link"
+                    >
+                      📍 View on Google Maps
+                    </a>
                   </div>
                 </div>
 
@@ -165,7 +173,9 @@ const Contact = () => {
                   <div className="contact-icon">📞</div>
                   <div>
                     <h4>Phone</h4>
-                    <p>+91 98765 43210<br />+91 87654 32109</p>
+                    <p>
+                      <a href="tel:+919767038479" className="phone-link">+91 9767038479</a>
+                    </p>
                   </div>
                 </div>
 
@@ -173,7 +183,10 @@ const Contact = () => {
                   <div className="contact-icon">✉️</div>
                   <div>
                     <h4>Email</h4>
-                    <p>info@kanhaiyakrushi.com<br />support@kanhaiyakrushi.com</p>
+                    <p>
+                      <a href="mailto:info@kanhaiyakrushi.com" className="email-link">info@kanhaiyakrushi.com</a><br />
+                      <a href="mailto:support@kanhaiyakrushi.com" className="email-link">support@kanhaiyakrushi.com</a>
+                    </p>
                   </div>
                 </div>
 
@@ -190,13 +203,42 @@ const Contact = () => {
               <div className="social-links-contact">
                 <h4>Follow Us</h4>
                 <div className="social-icons">
-                  <a href="#" className="social-link">📘</a>
-                  <a href="#" className="social-link">📷</a>
-                  <a href="#" className="social-link">🐦</a>
-                  <a href="#" className="social-link">📹</a>
+                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Facebook">📘</a>
+                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Instagram">📷</a>
+                  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Twitter">🐦</a>
+                  <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="YouTube">📹</a>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Google Maps Section - WITH YOUR ACTUAL EMBED CODE */}
+      <section className="map-section">
+        <div className="container">
+          <h2 className="section-title text-center">Find Us Here</h2>
+          <div className="map-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1894.4637711294495!2d75.1587207!3d18.2591429!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc48949d87a980d%3A0xa39dd297c64836a6!2sPatil%20House!5e0!3m2!1sen!2sin!4v1760534523094!5m2!1sen!2sin"
+              width="100%"
+              height="450"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Kanhaiya Krushi Location - Patil House, Jeur"
+            ></iframe>
+          </div>
+          <div className="map-action">
+            <a 
+              href="https://maps.app.goo.gl/hvWERXEXCCTknryc8" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="btn btn-primary btn-large"
+            >
+              🗺️ Open in Google Maps
+            </a>
           </div>
         </div>
       </section>

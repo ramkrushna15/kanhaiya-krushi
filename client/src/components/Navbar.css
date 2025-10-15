@@ -28,9 +28,18 @@
   transform: scale(1.05);
 }
 
+/* Updated for PNG logo */
 .logo-icon {
-  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   line-height: 1;
+}
+
+.logo-image {
+  width: 50px; /* adjust size as needed */
+  height: 50px;
+  object-fit: contain;
 }
 
 .logo-text {
@@ -170,7 +179,8 @@
     font-size: 0.65rem;
   }
 
-  .logo-icon {
-    font-size: 2.5rem;
+  .logo-image {
+    width: 40px; /* smaller on mobile */
+    height: 40px;
   }
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
+import logo from '../assets/logo.png'; // <-- import your PNG file
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,7 +15,10 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="container navbar-container">
         <Link to="/" className="navbar-logo">
-          <div className="logo-icon">🌾</div>
+          {/* Use the PNG logo instead of emoji */}
+          <div className="logo-icon">
+            <img src={logo} alt="Kanhaiya Krushi Logo" className="logo-image" />
+          </div>
           <div className="logo-text">
             <span className="logo-title">Kanhaiya Krushi</span>
             <span className="logo-subtitle">Sustainable Agriculture</span>

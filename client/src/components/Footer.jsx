@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../assets/logo.png'; // Import logo from assets
 import './Footer.css';
 
 const Footer = () => {
@@ -12,7 +13,11 @@ const Footer = () => {
           {/* Company Info */}
           <div className="footer-section">
             <div className="footer-logo">
-              <div className="footer-logo-icon">🌾</div>
+              <img 
+                src={logo} 
+                alt="Kanhaiya Krushi Logo" 
+                className="footer-logo-image"
+              />
               <div>
                 <h3>Kanhaiya Krushi</h3>
                 <p>Sustainable Agriculture Solutions</p>
@@ -23,10 +28,10 @@ const Footer = () => {
               and expert guidance for successful farming.
             </p>
             <div className="footer-social">
-              <a href="#" className="social-icon">📘</a>
-              <a href="#" className="social-icon">📷</a>
-              <a href="#" className="social-icon">🐦</a>
-              <a href="#" className="social-icon">📹</a>
+              <a href="#" className="social-icon" aria-label="Facebook">📘</a>
+              <a href="#" className="social-icon" aria-label="Instagram">📷</a>
+              <a href="#" className="social-icon" aria-label="Twitter">🐦</a>
+              <a href="#" className="social-icon" aria-label="YouTube">📹</a>
             </div>
           </div>
 
@@ -60,12 +65,12 @@ const Footer = () => {
             <div className="footer-contact">
               <p>
                 <strong>📍 Address:</strong><br />
-                Village Kanhaiya, Pimpri<br />
+                Near Market Yard, Jeur, Karmala, Solapur<br />
                 Maharashtra, India
               </p>
               <p>
                 <strong>📞 Phone:</strong><br />
-                +91 98765 43210
+                +91 9767038479
               </p>
               <p>
                 <strong>✉️ Email:</strong><br />
