@@ -1,4 +1,4 @@
-# Kanahiya Krushi - Sustainable Agriculture Website
+# Kanhaiya Krushi - Sustainable Agriculture Website
 
 A modern, full-stack agriculture e-commerce website built with React, Node.js, Express, and MongoDB.
 
@@ -46,7 +46,7 @@ cd server
 npm install
 
 # Create .env file
-echo "MONGODB_URI=mongodb://localhost:27017/kanahiya_krushi_db
+echo "MONGODB_URI=mongodb://localhost:27017/kanhaiya_krushi_db
 PORT=5000
 NODE_ENV=development" > .env
 
@@ -118,7 +118,7 @@ Replace the emoji icon (🌾) in the following files:
 
 Or add an actual logo image:
 ```jsx
-<img src="/path/to/logo.png" alt="Kanahiya Krushi" className="logo-image" />
+<img src="/path/to/logo.png" alt="Kanhaiya Krushi" className="logo-image" />
 ```
 
 ### Update Contact Details
@@ -180,4 +180,4 @@ Developed with ❤️ for sustainable agriculture
 
 ## 📞 Support
 
-For support, email info@kanahiyakrushi.com or visit our contact page.
+For support, email info@kanhaiyakrushi.com or visit our contact page.

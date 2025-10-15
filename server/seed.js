@@ -165,7 +165,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/agricultu
   console.log('✨ Sample data added successfully!');
   console.log(`📦 ${products.length} products added`);
   console.log(`🛠️  ${services.length} services added`);
-  console.log('\n🌾 Kanahiya Krushi database is ready!');
+  console.log('\n🌾 Kanhaiya Krushi database is ready!');
   
   process.exit();
 })

@@ -157,7 +157,7 @@ const Contact = () => {
                   <div className="contact-icon">📍</div>
                   <div>
                     <h4>Address</h4>
-                    <p>Village Kanahiya, Pimpri<br />Maharashtra, India - 411018</p>
+                    <p>Village Kanhaiya, Pimpri<br />Maharashtra, India - 411018</p>
                   </div>
                 </div>
 
@@ -173,7 +173,7 @@ const Contact = () => {
                   <div className="contact-icon">✉️</div>
                   <div>
                     <h4>Email</h4>
-                    <p>info@kanahiyakrushi.com<br />support@kanahiyakrushi.com</p>
+                    <p>info@kanhaiyakrushi.com<br />support@kanhaiyakrushi.com</p>
                   </div>
                 </div>
 

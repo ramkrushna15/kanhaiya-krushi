@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/kanahiya_krushi_db', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/kanhaiya_krushi_db', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -33,7 +33,7 @@ app.use('/api/contact', contactRoutes);
 // Root Route
 app.get('/', (req, res) => {
   res.json({ 
-    message: '🌾 Kanahiya Krushi API',
+    message: '🌾 Kanhaiya Krushi API',
     status: 'Server is running successfully!',
     description: 'Sustainable Agriculture Solutions',
     endpoints: {
@@ -75,5 +75,5 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on http://localhost:${PORT}`);
   console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`🌾 Kanahiya Krushi API is ready!`);
+  console.log(`🌾 Kanhaiya Krushi API is ready!`);
 });

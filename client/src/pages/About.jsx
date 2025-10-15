@@ -10,7 +10,7 @@ const About = () => {
       {/* Page Header */}
       <section className="page-header">
         <div className="container">
-          <h1>About Kanahiya Krushi</h1>
+          <h1>About Kanhaiya Krushi</h1>
           <p>Growing together towards a sustainable future</p>
         </div>
       </section>

@@ -14,7 +14,7 @@ const Footer = () => {
             <div className="footer-logo">
               <div className="footer-logo-icon">🌾</div>
               <div>
-                <h3>Kanahiya Krushi</h3>
+                <h3>Kanhaiya Krushi</h3>
                 <p>Sustainable Agriculture Solutions</p>
               </div>
             </div>
@@ -60,7 +60,7 @@ const Footer = () => {
             <div className="footer-contact">
               <p>
                 <strong>📍 Address:</strong><br />
-                Village Kanahiya, Pimpri<br />
+                Village Kanhaiya, Pimpri<br />
                 Maharashtra, India
               </p>
               <p>
@@ -69,7 +69,7 @@ const Footer = () => {
               </p>
               <p>
                 <strong>✉️ Email:</strong><br />
-                info@kanahiyakrushi.com
+                info@kanhaiyakrushi.com
               </p>
             </div>
           </div>
@@ -77,7 +77,7 @@ const Footer = () => {
 
         {/* Footer Bottom */}
         <div className="footer-bottom">
-          <p>&copy; {currentYear} Kanahiya Krushi. All rights reserved.</p>
+          <p>&copy; {currentYear} Kanhaiya Krushi. All rights reserved.</p>
           <div className="footer-bottom-links">
             <a href="#">Privacy Policy</a>
             <span>|</span>

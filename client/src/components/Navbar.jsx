@@ -16,7 +16,7 @@ const Navbar = () => {
         <Link to="/" className="navbar-logo">
           <div className="logo-icon">🌾</div>
           <div className="logo-text">
-            <span className="logo-title">Kanahiya Krushi</span>
+            <span className="logo-title">Kanhaiya Krushi</span>
             <span className="logo-subtitle">Sustainable Agriculture</span>
           </div>
         </Link>
