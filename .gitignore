@@ -8,9 +8,10 @@ server/node_modules/
 client/.env
 server/.env
 
-# Build files
+# Build and distribution
 client/build/
 dist/
+build/
 
 # Logs
 *.log
@@ -20,7 +21,7 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 
-# IDE
+# IDE settings
 .vscode/
 .idea/
 *.swp
@@ -29,12 +30,5 @@ Thumbs.db
 # Testing
 coverage/
 
-# Misc
-.cache/
-
-node_modules/
-.env
-.DS_Store
-dist/
-build/
+# Caches
 .cache/
