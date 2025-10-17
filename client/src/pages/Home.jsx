@@ -12,8 +12,8 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const [productsRes, servicesRes] = await Promise.all([
-          axios.get('http://localhost:5000/api/products/get-products?featured=true'),
-          axios.get('http://localhost:5000/api/services/get-services')
+          axios.get('https://kanhaiyakrushi.com/api/products/get-products?featured=true'),
+          axios.get('https://kanhaiyakrushi.com/api/services/get-services')
         ]);
         
         setFeaturedProducts(productsRes.data.data.slice(0, 3));
