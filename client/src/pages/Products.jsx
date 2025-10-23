@@ -1,4 +1,4 @@
-// client/src/pages/Products.jsx - UPDATED VERSION
+// client/src/pages/Products.jsx - FIXED VERSION
 import SEO from '../components/SEO';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -18,23 +18,8 @@ const Products = () => {
     fetchProducts();
   }, []);
 
+  // Filter products whenever category, search, or products change
   useEffect(() => {
-    filterProducts();
-  }, [selectedCategory, searchQuery, products]);
-
-  const fetchProducts = async () => {
-    try {
-      const response = await getProducts();
-      setProducts(response.data.data);
-      setFilteredProducts(response.data.data);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching products:', error);
-      setLoading(false);
-    }
-  };
-
-  const filterProducts = () => {
     let filtered = products;
 
     // Filter by category
@@ -52,6 +37,18 @@ const Products = () => {
     }
 
     setFilteredProducts(filtered);
+  }, [selectedCategory, searchQuery, products]);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await getProducts();
+      setProducts(response.data.data);
+      setFilteredProducts(response.data.data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      setLoading(false);
+    }
   };
 
   if (loading) {
@@ -63,7 +60,6 @@ const Products = () => {
   }
 
   return (
-
     <div className="products-page">
       {/* Page Header */}
       <section className="page-header">
@@ -72,6 +68,7 @@ const Products = () => {
           <p>Quality agricultural products for every farming need</p>
         </div>
       </section>
+
       <SEO
         title="Agricultural Products - Seeds, Fertilizers & More | Kanhaiya Krushi"
         description="Browse quality agricultural products including organic seeds, fertilizers, pesticides, and farming equipment."
@@ -147,6 +144,7 @@ const Products = () => {
                     <Link to={`/products/${product._id}`} className="product-link">
                       <h3 className="product-name">{product.name}</h3>
                     </Link>
+
                     <p className="product-description">
                       {product.description.substring(0, 100)}...
                     </p>
@@ -164,6 +162,7 @@ const Products = () => {
                         <span className="product-price">₹{product.price}</span>
                         <span className="product-unit">per {product.unit}</span>
                       </div>
+
                       <div className="product-stock">
                         {product.stock > 0 ? (
                           <span className="in-stock">✓ In Stock</span>
@@ -209,16 +208,19 @@ const Products = () => {
               <h3>Bulk Orders</h3>
               <p>Special discounts on bulk purchases</p>
             </div>
+
             <div className="info-item">
               <div className="info-icon">🚚</div>
               <h3>Free Delivery</h3>
               <p>On orders above ₹5,000</p>
             </div>
+
             <div className="info-item">
               <div className="info-icon">🔒</div>
               <h3>Secure Payment</h3>
               <p>100% secure transactions</p>
             </div>
+
             <div className="info-item">
               <div className="info-icon">📞</div>
               <h3>24/7 Support</h3>

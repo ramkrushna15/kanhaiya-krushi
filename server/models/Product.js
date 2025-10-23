@@ -56,5 +56,18 @@ const productSchema = new mongoose.Schema({
 });
 
 productSchema.index({ name: 'text', description: 'text' });
+// Create indexes when model is loaded
+productSchema.index({ name: 'text', description: 'text' });
+
+// Add method to ensure indexes are created
+productSchema.statics.createIndexesIfNeeded = async function() {
+  try {
+    await this.createIndexes();
+    console.log('✅ Text search indexes created successfully');
+  } catch (error) {
+    console.error('❌ Error creating indexes:', error.message);
+  }
+};
+
 
 module.exports = mongoose.model('Product', productSchema);

@@ -1,15 +1,15 @@
 // client/src/pages/ProductDetail.jsx
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getProductById } from '../services/api';
+import axios from 'axios';
 import './ProductDetail.css';
 
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const [selectedImage, setSelectedImage] = useState('');
 
   useEffect(() => {
     fetchProduct();
@@ -17,20 +17,20 @@ const ProductDetail = () => {
 
   const fetchProduct = async () => {
     try {
-      const response = await getProductById(id);
+      const response = await axios.get(`https://kanhaiyakrushi.com/api/products/${id}`);
       setProduct(response.data.data);
-      setSelectedImage(response.data.data.image);
       setLoading(false);
     } catch (error) {
       console.error('Error fetching product:', error);
+      setError('Product not found or unable to load');
       setLoading(false);
     }
   };
 
-  const handleQuantityChange = (action) => {
-    if (action === 'increase') {
+  const handleQuantityChange = (type) => {
+    if (type === 'increase') {
       setQuantity(prev => prev + 1);
-    } else if (action === 'decrease' && quantity > 1) {
+    } else if (type === 'decrease' && quantity > 1) {
       setQuantity(prev => prev - 1);
     }
   };
@@ -43,11 +43,23 @@ const ProductDetail = () => {
     );
   }
 
-  if (!product) {
+  if (error || !product) {
     return (
-      <div className="product-not-found">
-        <h2>Product Not Found</h2>
-        <Link to="/products" className="btn btn-primary">Back to Products</Link>
+      <div className="product-detail-page">
+        <section className="page-header">
+          <div className="container">
+            <h1>Product Not Found</h1>
+            <p>The product you're looking for doesn't exist</p>
+          </div>
+        </section>
+        <section className="section">
+          <div className="container text-center">
+            <p className="error-message">{error}</p>
+            <Link to="/products" className="btn btn-primary">
+              ← Back to Products
+            </Link>
+          </div>
+        </section>
       </div>
     );
   }
@@ -55,65 +67,66 @@ const ProductDetail = () => {
   return (
     <div className="product-detail-page">
       {/* Breadcrumb */}
-      <section className="breadcrumb">
+      <section className="breadcrumb-section">
         <div className="container">
-          <Link to="/">Home</Link> / <Link to="/products">Products</Link> / {product.name}
+          <div className="breadcrumb">
+            <Link to="/">Home</Link>
+            <span className="separator">›</span>
+            <Link to="/products">Products</Link>
+            <span className="separator">›</span>
+            <span>{product.name}</span>
+          </div>
         </div>
       </section>
 
-      {/* Product Detail */}
+      {/* Product Detail Section */}
       <section className="section">
         <div className="container">
           <div className="product-detail-grid">
-            {/* Product Images */}
-            <div className="product-images">
-              <div className="main-image">
-                <img src={selectedImage} alt={product.name} />
+            {/* Product Image */}
+            <div className="product-image-section">
+              <div className="product-badges-detail">
                 {product.isOrganic && (
-                  <span className="badge badge-organic-large">🌿 Organic Certified</span>
+                  <span className="badge badge-organic">🌿 Organic</span>
                 )}
                 {product.isFeatured && (
-                  <span className="badge badge-featured-large">⭐ Featured</span>
+                  <span className="badge badge-featured">⭐ Featured</span>
                 )}
               </div>
+              <img 
+                src={product.image} 
+                alt={product.name} 
+                className="product-detail-image" 
+              />
             </div>
 
             {/* Product Info */}
-            <div className="product-info-detail">
-              <span className="product-category-badge">{product.category}</span>
-              <h1 className="product-title">{product.name}</h1>
+            <div className="product-info-section">
+              <span className="product-category-detail">{product.category}</span>
+              <h1 className="product-title-detail">{product.name}</h1>
               
               <div className="product-price-section">
-                <div className="price-display">
-                  <span className="current-price">₹{product.price}</span>
-                  <span className="price-unit">per {product.unit}</span>
-                </div>
-                <div className="stock-status">
-                  {product.stock > 0 ? (
-                    <span className="in-stock">
-                      ✓ In Stock ({product.stock} {product.unit} available)
-                    </span>
-                  ) : (
-                    <span className="out-of-stock">Out of Stock</span>
-                  )}
-                </div>
+                <span className="product-price-detail">₹{product.price}</span>
+                <span className="product-unit-detail">per {product.unit}</span>
               </div>
 
-              <div className="product-description">
-                <h3>Description</h3>
-                <p>{product.description}</p>
+              <div className="product-stock-section">
+                {product.stock > 0 ? (
+                  <span className="in-stock-detail">✓ In Stock ({product.stock} units available)</span>
+                ) : (
+                  <span className="out-of-stock-detail">✗ Out of Stock</span>
+                )}
               </div>
+
+              <p className="product-description-detail">{product.description}</p>
 
               {/* Features */}
               {product.features && product.features.length > 0 && (
-                <div className="product-features-detail">
-                  <h3>Key Features</h3>
-                  <ul>
+                <div className="product-features-section">
+                  <h3>Key Features:</h3>
+                  <ul className="product-features-detail">
                     {product.features.map((feature, index) => (
-                      <li key={index}>
-                        <span className="feature-icon">✓</span>
-                        {feature}
-                      </li>
+                      <li key={index}>✓ {feature}</li>
                     ))}
                   </ul>
                 </div>
@@ -121,10 +134,13 @@ const ProductDetail = () => {
 
               {/* Tags */}
               {product.tags && product.tags.length > 0 && (
-                <div className="product-tags">
-                  {product.tags.map((tag, index) => (
-                    <span key={index} className="tag">#{tag}</span>
-                  ))}
+                <div className="product-tags-section">
+                  <h4>Tags:</h4>
+                  <div className="product-tags">
+                    {product.tags.map((tag, index) => (
+                      <span key={index} className="product-tag">#{tag}</span>
+                    ))}
+                  </div>
                 </div>
               )}
 
@@ -133,21 +149,15 @@ const ProductDetail = () => {
                 <label>Quantity:</label>
                 <div className="quantity-controls">
                   <button 
+                    className="quantity-btn" 
                     onClick={() => handleQuantityChange('decrease')}
-                    className="qty-btn"
-                    disabled={quantity <= 1}
                   >
-                    −
+                    -
                   </button>
-                  <input 
-                    type="number" 
-                    value={quantity} 
-                    onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                    className="qty-input"
-                  />
+                  <span className="quantity-value">{quantity}</span>
                   <button 
+                    className="quantity-btn" 
                     onClick={() => handleQuantityChange('increase')}
-                    className="qty-btn"
                   >
                     +
                   </button>
@@ -156,43 +166,41 @@ const ProductDetail = () => {
 
               {/* Action Buttons */}
               <div className="product-actions">
-                <Link to="/contact" className="btn btn-primary btn-large">
-                  📞 Contact for Order
+                <button className="btn btn-primary btn-large">
+                  Add to Inquiry
+                </button>
+                <Link to="/contact" className="btn btn-secondary btn-large">
+                  Contact Us
                 </Link>
-                <a 
-                  href={`https://wa.me/919767038479?text=Hi, I'm interested in ${product.name}`}
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="btn btn-secondary btn-large"
-                >
-                  💬 WhatsApp Inquiry
-                </a>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-              {/* Additional Info */}
-              <div className="additional-info">
-                <div className="info-item">
-                  <span className="icon">🚚</span>
-                  <div>
-                    <strong>Free Delivery</strong>
-                    <p>On orders above ₹5,000</p>
-                  </div>
-                </div>
-                <div className="info-item">
-                  <span className="icon">✓</span>
-                  <div>
-                    <strong>Quality Assured</strong>
-                    <p>100% genuine products</p>
-                  </div>
-                </div>
-                <div className="info-item">
-                  <span className="icon">📞</span>
-                  <div>
-                    <strong>Expert Support</strong>
-                    <p>24/7 agricultural guidance</p>
-                  </div>
-                </div>
-              </div>
+      {/* Additional Info */}
+      <section className="section bg-light-beige">
+        <div className="container">
+          <div className="additional-info-grid">
+            <div className="info-box">
+              <div className="info-icon">🚚</div>
+              <h3>Free Delivery</h3>
+              <p>On orders above ₹5,000</p>
+            </div>
+            <div className="info-box">
+              <div className="info-icon">🔒</div>
+              <h3>Secure Payment</h3>
+              <p>100% secure transactions</p>
+            </div>
+            <div className="info-box">
+              <div className="info-icon">📞</div>
+              <h3>24/7 Support</h3>
+              <p>Expert advice anytime</p>
+            </div>
+            <div className="info-box">
+              <div className="info-icon">↩️</div>
+              <h3>Easy Returns</h3>
+              <p>7-day return policy</p>
             </div>
           </div>
         </div>

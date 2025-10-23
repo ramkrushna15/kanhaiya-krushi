@@ -26,20 +26,3 @@
     <priority>0.7</priority>
   </url>
 </urlset>
-```
-
-**✅ Verify**: File created at `client/public/sitemap.xml`
-
----
-
-## **STEP 14: Update robots.txt** (1 minute)
-
-**File**: `client/public/robots.txt` (REPLACE)
-
-Replace content with:
-```
-# https://www.robotstxt.org/robotstxt.html
-User-agent: *
-Allow: /
-
-Sitemap: https://kanhaiyakrushi.com/sitemap.xml
