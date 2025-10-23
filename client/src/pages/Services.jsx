@@ -1,4 +1,5 @@
 // client/src/pages/Services.jsx
+import SEO from '../components/SEO';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getServices } from '../services/api';
@@ -40,6 +41,11 @@ const Services = () => {
           <p>Expert agricultural solutions tailored to your needs</p>
         </div>
       </section>
+      <SEO
+        title="Agricultural Services - Consultation & Soil Testing | Kanhaiya Krushi"
+        description="Expert agricultural services including soil testing, crop planning, and pest management in Maharashtra."
+        url="https://kanhaiyakrushi.com/services"
+      />
 
       {/* Services Grid */}
       <section className="section">
@@ -52,7 +58,7 @@ const Services = () => {
                 </div>
                 <h3 className="service-title-large">{service.title}</h3>
                 <p className="service-description-large">{service.description}</p>
-                
+
                 {service.features && service.features.length > 0 && (
                   <ul className="service-features-list">
                     {service.features.map((feature, index) => (

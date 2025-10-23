@@ -1,5 +1,7 @@
-// client/src/pages/Products.jsx
+// client/src/pages/Products.jsx - UPDATED VERSION
+import SEO from '../components/SEO';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getProducts } from '../services/api';
 import './Products.css';
 
@@ -8,12 +10,17 @@ const Products = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const categories = ['All', 'Seeds', 'Fertilizers', 'Pesticides', 'Equipment', 'Organic Products', 'Tools'];
 
   useEffect(() => {
     fetchProducts();
   }, []);
+
+  useEffect(() => {
+    filterProducts();
+  }, [selectedCategory, searchQuery, products]);
 
   const fetchProducts = async () => {
     try {
@@ -27,14 +34,24 @@ const Products = () => {
     }
   };
 
-  const filterByCategory = (category) => {
-    setSelectedCategory(category);
-    if (category === 'All') {
-      setFilteredProducts(products);
-    } else {
-      const filtered = products.filter(product => product.category === category);
-      setFilteredProducts(filtered);
+  const filterProducts = () => {
+    let filtered = products;
+
+    // Filter by category
+    if (selectedCategory !== 'All') {
+      filtered = filtered.filter(product => product.category === selectedCategory);
     }
+
+    // Filter by search query
+    if (searchQuery) {
+      filtered = filtered.filter(product =>
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.tags?.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+      );
+    }
+
+    setFilteredProducts(filtered);
   };
 
   if (loading) {
@@ -46,6 +63,7 @@ const Products = () => {
   }
 
   return (
+
     <div className="products-page">
       {/* Page Header */}
       <section className="page-header">
@@ -54,17 +72,41 @@ const Products = () => {
           <p>Quality agricultural products for every farming need</p>
         </div>
       </section>
+      <SEO
+        title="Agricultural Products - Seeds, Fertilizers & More | Kanhaiya Krushi"
+        description="Browse quality agricultural products including organic seeds, fertilizers, pesticides, and farming equipment."
+        url="https://kanhaiyakrushi.com/products"
+      />
 
       {/* Products Section */}
       <section className="section">
         <div className="container">
+          {/* Search Bar */}
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="🔍 Search products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="search-input"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="clear-search"
+              >
+                ✕
+              </button>
+            )}
+          </div>
+
           {/* Category Filter */}
           <div className="category-filter">
             {categories.map((category) => (
               <button
                 key={category}
                 className={`filter-btn ${selectedCategory === category ? 'active' : ''}`}
-                onClick={() => filterByCategory(category)}
+                onClick={() => setSelectedCategory(category)}
               >
                 {category}
               </button>
@@ -74,6 +116,7 @@ const Products = () => {
           {/* Products Count */}
           <div className="products-count">
             Showing {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
+            {searchQuery && ` for "${searchQuery}"`}
           </div>
 
           {/* Products Grid */}
@@ -89,18 +132,25 @@ const Products = () => {
                       <span className="badge badge-featured">⭐ Featured</span>
                     )}
                   </div>
-                  
-                  <img 
-                    src={product.image} 
-                    alt={product.name} 
-                    className="product-image" 
-                  />
-                  
+
+                  <Link to={`/products/${product._id}`}>
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="product-image"
+                      loading="lazy"
+                    />
+                  </Link>
+
                   <div className="product-content">
                     <span className="product-category">{product.category}</span>
-                    <h3 className="product-name">{product.name}</h3>
-                    <p className="product-description">{product.description}</p>
-                    
+                    <Link to={`/products/${product._id}`} className="product-link">
+                      <h3 className="product-name">{product.name}</h3>
+                    </Link>
+                    <p className="product-description">
+                      {product.description.substring(0, 100)}...
+                    </p>
+
                     {product.features && product.features.length > 0 && (
                       <ul className="product-features">
                         {product.features.slice(0, 3).map((feature, index) => (
@@ -108,7 +158,7 @@ const Products = () => {
                         ))}
                       </ul>
                     )}
-                    
+
                     <div className="product-footer">
                       <div className="product-pricing">
                         <span className="product-price">₹{product.price}</span>
@@ -122,17 +172,29 @@ const Products = () => {
                         )}
                       </div>
                     </div>
-                    
-                    <button className="btn btn-primary btn-block">
-                      Add to Inquiry
-                    </button>
+
+                    <Link
+                      to={`/products/${product._id}`}
+                      className="btn btn-primary btn-block"
+                    >
+                      View Details
+                    </Link>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
             <div className="no-products">
-              <p>No products found in this category.</p>
+              <p>No products found matching your criteria.</p>
+              <button
+                onClick={() => {
+                  setSearchQuery('');
+                  setSelectedCategory('All');
+                }}
+                className="btn btn-primary"
+              >
+                Clear Filters
+              </button>
             </div>
           )}
         </div>

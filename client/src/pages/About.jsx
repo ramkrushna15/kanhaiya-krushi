@@ -1,12 +1,18 @@
 // ==========================================
 // client/src/pages/About.jsx
 // ==========================================
+import SEO from '../components/SEO';
 import React from 'react';
 import './About.css';
 
 const About = () => {
   return (
     <div className="about-page">
+      <SEO
+        title="About Us - Kanhaiya Krushi"
+        description="Learn about Kanhaiya Krushi, your trusted partner in sustainable agriculture with over 10 years of experience."
+        url="https://kanhaiyakrushi.com/about"
+      />
       {/* Page Header */}
       <section className="page-header">
         <div className="container">
@@ -33,9 +39,9 @@ const About = () => {
               </p>
             </div>
             <div className="about-image">
-              <img 
-                src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600" 
-                alt="Farming" 
+              <img
+                src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600"
+                alt="Farming"
               />
             </div>
           </div>

@@ -1,8 +1,6 @@
-// ==========================================
-// client/src/pages/Contact.jsx - Complete with Working Google Maps
-// ==========================================
 import React, { useState } from 'react';
 import { submitContact } from '../services/api';
+import SEO from '../components/SEO';
 import './Contact.css';
 
 const Contact = () => {
@@ -13,34 +11,66 @@ const Contact = () => {
     subject: '',
     message: ''
   });
+  const [errors, setErrors] = useState({});
   const [status, setStatus] = useState({ type: '', message: '' });
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.name.trim() || formData.name.trim().length < 2) {
+      newErrors.name = 'Name must be at least 2 characters';
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim() || !emailRegex.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email';
+    }
+
+    if (formData.phone && !/^[\d\s\+\-\(\)]+$/.test(formData.phone)) {
+      newErrors.phone = 'Please enter a valid phone number';
+    }
+
+    if (!formData.subject.trim() || formData.subject.trim().length < 3) {
+      newErrors.subject = 'Subject must be at least 3 characters';
+    }
+
+    if (!formData.message.trim() || formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      setStatus({ type: 'error', message: 'Please fix the errors above' });
+      return;
+    }
+
     setLoading(true);
     setStatus({ type: '', message: '' });
 
     try {
-      const response = await submitContact(formData);
+      await submitContact(formData);
       setStatus({
         type: 'success',
-        message: response.data.message
+        message: 'Thank you! Your message has been sent successfully.'
       });
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: ''
-      });
+      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      setErrors({});
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (error) {
       setStatus({
         type: 'error',
@@ -53,7 +83,12 @@ const Contact = () => {
 
   return (
     <div className="contact-page">
-      {/* Page Header */}
+      <SEO 
+        title="Contact Us - Kanhaiya Krushi | Jeur, Karmala, Solapur"
+        description="Get in touch with Kanhaiya Krushi for agricultural products and services. Located in Jeur, Karmala, Solapur, Maharashtra."
+        url="https://kanhaiyakrushi.com/contact"
+      />
+
       <section className="page-header">
         <div className="container">
           <h1>Contact Us</h1>
@@ -61,13 +96,18 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
       <section className="section">
         <div className="container">
           <div className="contact-grid">
-            {/* Contact Form */}
             <div className="contact-form-container">
               <h2>Send Us a Message</h2>
+              
+              {status.message && (
+                <div className={`alert alert-${status.type}`}>
+                  {status.message}
+                </div>
+              )}
+
               <form onSubmit={handleSubmit} className="contact-form">
                 <div className="form-group">
                   <label htmlFor="name">Full Name *</label>
@@ -77,9 +117,9 @@ const Contact = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    required
-                    className="form-input"
+                    className={`form-input ${errors.name ? 'error' : ''}`}
                   />
+                  {errors.name && <span className="error-message">{errors.name}</span>}
                 </div>
 
                 <div className="form-group">
@@ -90,9 +130,9 @@ const Contact = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    required
-                    className="form-input"
+                    className={`form-input ${errors.email ? 'error' : ''}`}
                   />
+                  {errors.email && <span className="error-message">{errors.email}</span>}
                 </div>
 
                 <div className="form-group">
@@ -103,8 +143,10 @@ const Contact = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="form-input"
+                    className={`form-input ${errors.phone ? 'error' : ''}`}
+                    placeholder="+91 9767038479"
                   />
+                  {errors.phone && <span className="error-message">{errors.phone}</span>}
                 </div>
 
                 <div className="form-group">
@@ -115,9 +157,9 @@ const Contact = () => {
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    required
-                    className="form-input"
+                    className={`form-input ${errors.subject ? 'error' : ''}`}
                   />
+                  {errors.subject && <span className="error-message">{errors.subject}</span>}
                 </div>
 
                 <div className="form-group">
@@ -127,29 +169,19 @@ const Contact = () => {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    required
                     rows="5"
-                    className="form-input"
+                    className={`form-input ${errors.message ? 'error' : ''}`}
                   ></textarea>
+                  <div className="character-count">{formData.message.length}/1000</div>
+                  {errors.message && <span className="error-message">{errors.message}</span>}
                 </div>
 
-                {status.message && (
-                  <div className={`alert alert-${status.type}`}>
-                    {status.message}
-                  </div>
-                )}
-
-                <button 
-                  type="submit" 
-                  className="btn btn-primary btn-block"
-                  disabled={loading}
-                >
+                <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
                   {loading ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
             </div>
 
-            {/* Contact Info */}
             <div className="contact-info-container">
               <h2>Get In Touch</h2>
               <div className="contact-info-list">
@@ -173,9 +205,7 @@ const Contact = () => {
                   <div className="contact-icon">📞</div>
                   <div>
                     <h4>Phone</h4>
-                    <p>
-                      <a href="tel:+919767038479" className="phone-link">+91 9767038479</a>
-                    </p>
+                    <p><a href="tel:+919767038479" className="phone-link">+91 9767038479</a></p>
                   </div>
                 </div>
 
@@ -199,14 +229,13 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Social Links */}
               <div className="social-links-contact">
                 <h4>Follow Us</h4>
                 <div className="social-icons">
-                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Facebook">📘</a>
-                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Instagram">📷</a>
-                  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Twitter">🐦</a>
-                  <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="YouTube">📹</a>
+                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-link">📘</a>
+                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-link">📷</a>
+                  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-link">🐦</a>
+                  <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="social-link">📹</a>
                 </div>
               </div>
             </div>
@@ -214,7 +243,6 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Google Maps Section - WITH YOUR ACTUAL EMBED CODE */}
       <section className="map-section">
         <div className="container">
           <h2 className="section-title text-center">Find Us Here</h2>
@@ -226,8 +254,7 @@ const Contact = () => {
               style={{ border: 0 }}
               allowFullScreen=""
               loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Kanhaiya Krushi Location - Patil House, Jeur"
+              title="Kanhaiya Krushi Location"
             ></iframe>
           </div>
           <div className="map-action">

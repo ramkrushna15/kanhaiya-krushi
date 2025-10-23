@@ -36,3 +36,76 @@
     transform: rotate(360deg);
   }
 }
+
+/* Loading Fallback */
+.loading-fallback {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  gap: 1rem;
+}
+
+.loading-fallback p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+/* Error Boundary */
+.error-boundary {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.error-boundary h1 {
+  font-size: 2.5rem;
+  color: var(--primary-green);
+  margin-bottom: 1rem;
+}
+
+.error-boundary p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+/* 404 Not Found */
+.not-found {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  background: var(--light-beige);
+}
+
+.not-found h1 {
+  font-size: 8rem;
+  color: var(--primary-green);
+  margin: 0;
+  font-weight: 700;
+}
+
+.not-found h2 {
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin: 1rem 0;
+}
+
+.not-found p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .not-found h1 {
+    font-size: 5rem;
+  }
+}
