@@ -1,0 +1,25 @@
+{
+  "name": "kanhaiya-krushi",
+  "version": "1.0.0",
+  "description": "Kanhaiya Krushi - Sustainable Agriculture Website",
+  "main": "server/server.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm start",
+    "build": "cd client && npm run build",
+    "start": "cd server && npm start",
+    "install-deps": "npm install && cd server && npm install && cd ../client && npm install",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "keywords": ["agriculture", "farming", "e-commerce", "sustainable", "maharashtra"],
+  "author": "Kanhaiya Krushi Seva Kendra",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.x",
+    "npm": ">=8.x"
+  }
+}
