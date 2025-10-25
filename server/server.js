@@ -79,21 +79,23 @@ app.get('/', (req, res) => {
     description: 'Sustainable Agriculture Solutions',
     version: '1.0.0',
     endpoints: {
-      products: '/api/products',
-      services: '/api/services',
+      products: '/api/products/get-products',
+      services: '/api/services/get-services',
       contact: '/api/contact',
-      health: '/health'
+      health: '/api/health'
     }
   });
 });
 
-// Health Check Route
-app.get('/health', (req, res) => {
+// Health Check Route (MUST come after API routes)
+app.get('/api/health', (req, res) => {
   const healthcheck = {
     status: 'healthy',
     uptime: process.uptime(),
     timestamp: new Date().toISOString(),
-    mongodb: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
+    mongodb: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+    environment: process.env.NODE_ENV,
+    port: process.env.PORT
   };
   
   try {
@@ -105,12 +107,13 @@ app.get('/health', (req, res) => {
   }
 });
 
-// 404 Handler
+// 404 Handler (MUST be LAST)
 app.use((req, res) => {
   res.status(404).json({
     success: false,
     message: 'Route not found',
-    path: req.originalUrl
+    path: req.originalUrl,
+    availableEndpoints: ['/api/health', '/api/products/get-products', '/api/services/get-services', '/api/contact']
   });
 });
 

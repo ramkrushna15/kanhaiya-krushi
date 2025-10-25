@@ -18,12 +18,12 @@ const Home = () => {
     try {
       setLoading(true);
       setError(null);
-      
+
       const [productsRes, servicesRes] = await Promise.all([
         getProducts({ featured: true }),
         getServices()
       ]);
-      
+
       setFeaturedProducts(productsRes.data.data.slice(0, 3));
       setServices(servicesRes.data.data.slice(0, 3));
     } catch (error) {
@@ -61,7 +61,7 @@ const Home = () => {
 
   return (
     <div className="home">
-      <SEO 
+      <SEO
         title="Kanhaiya Krushi - Sustainable Agriculture Solutions"
         description="Your trusted partner in sustainable agriculture. Quality seeds, fertilizers, and farming equipment."
         url="https://kanhaiyakrushi.com/"
@@ -125,7 +125,7 @@ const Home = () => {
             <h2 className="section-title">Featured Products</h2>
             <Link to="/products" className="btn btn-secondary">View All Products</Link>
           </div>
-          
+
           {featuredProducts.length > 0 ? (
             <div className="products-grid">
               {featuredProducts.map((product) => (
@@ -133,9 +133,9 @@ const Home = () => {
                   <div className="product-badge">
                     {product.isOrganic && <span className="badge-organic">🌿 Organic</span>}
                   </div>
-                  <img 
-                    src={product.image} 
-                    alt={product.name} 
+                  <img
+                    src={product.image}
+                    alt={product.name}
                     className="product-image"
                     loading="lazy"
                     onError={(e) => {
@@ -149,7 +149,7 @@ const Home = () => {
                     </p>
                     <div className="product-footer">
                       <span className="product-price">₹{product.price}/{product.unit}</span>
-                      <Link to="/products" className="btn-link">View Details →</Link>
+                      <Link to={`/products/${product._id}`} className="btn-link">View Details →</Link>
                     </div>
                   </div>
                 </div>

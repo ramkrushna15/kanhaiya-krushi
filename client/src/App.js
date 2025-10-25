@@ -10,6 +10,7 @@ import ProductDetail from './pages/ProductDetail'; // NEW IMPORT
 import Services from './pages/Services';
 import Contact from './pages/Contact';
 import './App.css';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -21,10 +22,10 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/products" element={<Products />} />
-            {/* NEW ROUTE - Individual Product Details */}
             <Route path="/products/:id" element={<ProductDetail />} />
             <Route path="/services" element={<Services />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />
