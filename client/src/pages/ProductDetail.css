@@ -341,3 +341,52 @@
     gap: 1.5rem;
   }
 }
+
+/* Two-column layout → stack on mobile */
+.product-detail-grid {
+display: grid;
+grid-template-columns: 1.1fr 1fr;
+gap: 24px;
+}
+@media (max-width: 960px) { .product-detail-grid { grid-template-columns: 1fr; } }
+
+/* Image sizing */
+.product-detail-image {
+width: 100%;
+aspect-ratio: 4 / 3;
+object-fit: cover;
+border-radius: 10px;
+}
+
+/* Price/stock wrap nicely */
+.product-price-section,
+.product-stock-section {
+display: flex;
+align-items: center;
+gap: 8px;
+flex-wrap: wrap;
+}
+
+/* Badges wrap */
+.product-badges-detail {
+display: flex;
+gap: 8px;
+flex-wrap: wrap;
+margin-bottom: 8px;
+}
+
+/* Quantity controls become full-width on small screens */
+.quantity-controls { display: inline-flex; gap: 8px; align-items: center; }
+@media (max-width: 480px) {
+.quantity-section { display: grid; gap: 8px; }
+.product-actions .btn { width: 100%; }
+}
+
+/* Additional info grid */
+.additional-info-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 12px;
+}
+@media (max-width: 900px) { .additional-info-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .additional-info-grid { grid-template-columns: 1fr; } }

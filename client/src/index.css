@@ -228,3 +228,69 @@ code {
 .skip-to-main:focus {
   top: 0;
 }
+
+/* Container and spacing utilities */
+.container {
+width: 100%;
+max-width: 1100px;
+margin-inline: auto;
+padding-inline: 16px;
+}
+
+/* Responsive typography scale */
+:root {
+--h1: clamp(28px, 6vw, 48px);
+--h2: clamp(22px, 4.8vw, 36px);
+--h3: clamp(18px, 3.8vw, 28px);
+--p: clamp(14px, 3.2vw, 16px);
+}
+
+h1 { font-size: var(--h1); }
+h2 { font-size: var(--h2); }
+h3 { font-size: var(--h3); }
+p, li, a, button, input, textarea { font-size: var(--p); }
+
+/* Make all images responsive by default inside cards/sections */
+img {
+max-width: 100%;
+height: auto;
+display: block;
+}
+
+/* Buttons: full width on small screens when needed */
+@media (max-width: 480px) {
+.btn.btn-large,
+.btn.btn-primary,
+.btn.btn-secondary,
+.btn.btn-outline {
+width: 100%;
+}
+}
+
+/* Safe gutters on mobile to avoid edge-clinging content */
+.section,
+.page-header {
+padding-inline: 16px;
+}
+
+/* Reduce giant vertical paddings on small viewports */
+@media (max-width: 768px) {
+.section { padding-block: 32px; }
+.page-header { padding-block: 28px; }
+}
+
+Navbar (mobile spacing and tap targets)
+File: client/src/components/Navbar.css
+/* Ensure mobile nav is readable and spaced */
+.navbar { padding: 10px 16px; }
+.nav-links a { padding: 10px 12px; line-height: 1.2; }
+
+@media (max-width: 768px) {
+.navbar-brand { font-size: 18px; }
+.nav-toggle { width: 42px; height: 42px; }
+.nav-links {
+gap: 8px;
+padding-block: 8px;
+}
+.nav-links a { display: block; padding: 10px 12px; }
+}

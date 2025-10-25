@@ -144,7 +144,6 @@ const Contact = () => {
                     value={formData.phone}
                     onChange={handleChange}
                     className={`form-input ${errors.phone ? 'error' : ''}`}
-                    placeholder="+91 9767038479"
                   />
                   {errors.phone && <span className="error-message">{errors.phone}</span>}
                 </div>
@@ -224,7 +223,7 @@ const Contact = () => {
                   <div className="contact-icon">🕐</div>
                   <div>
                     <h4>Business Hours</h4>
-                    <p>Monday - Saturday: 9:00 AM - 6:00 PM<br />Sunday: Closed</p>
+                    <p>Monday - Saturday: 9:00 AM - 8:00 PM<br />Sunday: 9:00 AM - 5:00 PM</p>
                   </div>
                 </div>
               </div>

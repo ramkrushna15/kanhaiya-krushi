@@ -158,3 +158,26 @@
     padding: 2rem;
   }
 }
+
+/* 3→2→1 responsive grid for services cards */
+.services-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 16px;
+}
+@media (max-width: 1024px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .services-grid { grid-template-columns: 1fr; } }
+
+.service-card .service-icon-large {
+font-size: clamp(28px, 6vw, 42px);
+}
+
+/* Section header buttons wrap to next line */
+.section-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 12px;
+flex-wrap: wrap;
+}
+
