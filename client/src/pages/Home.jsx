@@ -192,36 +192,36 @@ const Home = () => {
       {/* Testimonials Section */}
       <section className="section bg-cream testimonials-section">
         <div className="container">
-          <h2 className="section-title text-center">What Our Farmers Say</h2>
+          <h2 className="section-title text-center">आमच्या शेतकऱ्यांचे मत</h2>
           <div className="testimonials-grid">
             <div className="testimonial-card">
               <div className="testimonial-rating">⭐⭐⭐⭐⭐</div>
               <p className="testimonial-text">
-                "Kanhaiya Krushi's organic seeds have significantly improved my crop yield. Highly recommended!"
+                "कन्हैया कृषी केंद्रातील जैविक बियाणे वापरल्यानंतर माझ्या पिकाचे उत्पादन खूप वाढले आहे. खरंच उत्तम गुणवत्ता!"
               </p>
               <div className="testimonial-author">
-                <strong>Rajesh Kumar</strong>
-                <span>Farmer, Punjab</span>
+                <strong>ज्योतिराम जाधव</strong>
+                <span>शेतकरी, महाराष्ट्र</span>
               </div>
             </div>
             <div className="testimonial-card">
               <div className="testimonial-rating">⭐⭐⭐⭐⭐</div>
               <p className="testimonial-text">
-                "Best quality fertilizers at reasonable prices. Their soil testing service is excellent."
+                "येथील खते आणि कीटकनाशके खूप चांगल्या दर्जाची आहेत. त्यांची मातीची तपासणी सेवा अतिशय उपयुक्त आहे."
               </p>
               <div className="testimonial-author">
-                <strong>Priya Sharma</strong>
-                <span>Agricultural Expert, Maharashtra</span>
+                <strong>नागनाथ नायकनावरे</strong>
+                <span>शेतकरी, महाराष्ट्र</span>
               </div>
             </div>
             <div className="testimonial-card">
               <div className="testimonial-rating">⭐⭐⭐⭐⭐</div>
               <p className="testimonial-text">
-                "Fast delivery and great customer service. They truly care about farmers."
+                "वेळेवर डिलिव्हरी आणि खूप चांगली सेवा. शेतकऱ्यांची खरी काळजी घेतात ते येथे."
               </p>
               <div className="testimonial-author">
-                <strong>Suresh Patel</strong>
-                <span>Farmer, Gujarat</span>
+                <strong>गणेश पोळ</strong>
+                <span>शेतकरी, महाराष्ट्र</span>
               </div>
             </div>
           </div>
