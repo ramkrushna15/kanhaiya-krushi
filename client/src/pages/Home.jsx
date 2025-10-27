@@ -192,7 +192,7 @@ const Home = () => {
       {/* Testimonials Section */}
       <section className="section bg-cream testimonials-section">
         <div className="container">
-          <h2 className="section-title text-center">आमच्या शेतकऱ्यांचे मत</h2>
+          <h2 className="section-title text-center">What Our Farmers Say</h2>
           <div className="testimonials-grid">
             <div className="testimonial-card">
               <div className="testimonial-rating">⭐⭐⭐⭐⭐</div>
@@ -201,7 +201,7 @@ const Home = () => {
               </p>
               <div className="testimonial-author">
                 <strong>ज्योतिराम जाधव</strong>
-                <span>शेतकरी, महाराष्ट्र</span>
+                <span>शेतकरी - करमाळा, महाराष्ट्र</span>
               </div>
             </div>
             <div className="testimonial-card">
@@ -210,8 +210,8 @@ const Home = () => {
                 "येथील खते आणि कीटकनाशके खूप चांगल्या दर्जाची आहेत. त्यांची मातीची तपासणी सेवा अतिशय उपयुक्त आहे."
               </p>
               <div className="testimonial-author">
-                <strong>नागनाथ नायकनावरे</strong>
-                <span>शेतकरी, महाराष्ट्र</span>
+                <strong>नागनाथ गुंड</strong>
+                <span>शेतकरी - माढा, महाराष्ट्र</span>
               </div>
             </div>
             <div className="testimonial-card">
@@ -222,6 +222,16 @@ const Home = () => {
               <div className="testimonial-author">
                 <strong>गणेश पोळ</strong>
                 <span>शेतकरी, महाराष्ट्र</span>
+              </div>
+            </div>
+            <div className="testimonial-card">
+              <div className="testimonial-rating">⭐⭐⭐⭐⭐</div>
+              <p className="testimonial-text">
+                "Best quality fertilizers at reasonable prices. Their soil testing service is excellent."
+              </p>
+              <div className="testimonial-author">
+                <strong>Priya Sharma</strong>
+                <span>Agricultural Expert, Maharashtra</span>
               </div>
             </div>
           </div>
