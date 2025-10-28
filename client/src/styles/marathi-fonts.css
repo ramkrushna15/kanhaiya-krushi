@@ -1,43 +1,41 @@
-/* Professional Marathi Font Styling - Similar to FarmSchool.com */
+/* Professional Marathi Font Styling updated to use Eczar for headings and body where suitable */
 
-/* Import Google Fonts for Marathi */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Mukti:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
+/* Import Google Fonts: Eczar for Devanagari, plus fallbacks */
+@import url('https://fonts.googleapis.com/css2?family=Eczar:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@300;400;500;600;700;800;900&display=swap');
 
-/* Root variables for Marathi typography */
 :root {
-  --marathi-primary-font: 'Noto Sans Devanagari', 'Mukti', 'Kalam', 'Shivaji01', sans-serif;
-  --marathi-heading-font: 'Kalam', 'Noto Sans Devanagari', 'Mukti', sans-serif;
-  --marathi-body-font: 'Noto Sans Devanagari', 'Mukti', sans-serif;
+  /* Use Eczar as primary for Marathi, with Noto Sans Devanagari fallback */
+  --marathi-primary-font: 'Eczar', 'Noto Sans Devanagari', serif;
+  --marathi-heading-font: 'Eczar', 'Noto Sans Devanagari', serif;
+  --marathi-body-font: 'Eczar', 'Noto Sans Devanagari', serif;
 }
 
-/* Language-specific font application */
-[lang="mr-IN"], 
-[lang="mr"], 
+/* Apply fonts when Marathi language is active */
+[lang="mr-IN"],
+[lang="mr"],
 .marathi-text,
 .language-mr {
-  font-family: var(--marathi-primary-font) !important;
+  font-family: var(--marathi-body-font) !important;
   font-feature-settings: "kern" 1, "liga" 1, "rlig" 1;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Marathi headings */
-[lang="mr-IN"] h1, [lang="mr-IN"] h2, [lang="mr-IN"] h3, 
+/* Headings in Marathi */
+[lang="mr-IN"] h1, [lang="mr-IN"] h2, [lang="mr-IN"] h3,
 [lang="mr-IN"] h4, [lang="mr-IN"] h5, [lang="mr-IN"] h6,
-[lang="mr"] h1, [lang="mr"] h2, [lang="mr"] h3, 
+[lang="mr"] h1, [lang="mr"] h2, [lang="mr"] h3,
 [lang="mr"] h4, [lang="mr"] h5, [lang="mr"] h6,
 .marathi-text h1, .marathi-text h2, .marathi-text h3,
 .marathi-text h4, .marathi-text h5, .marathi-text h6 {
   font-family: var(--marathi-heading-font) !important;
   font-weight: 600;
-  line-height: 1.4;
-  letter-spacing: 0.01em;
+  line-height: 1.35;
+  letter-spacing: 0.005em;
 }
 
-/* Marathi body text */
+/* Body text in Marathi */
 [lang="mr-IN"] p, [lang="mr-IN"] span, [lang="mr-IN"] div,
 [lang="mr-IN"] li, [lang="mr-IN"] td, [lang="mr-IN"] th,
 [lang="mr"] p, [lang="mr"] span, [lang="mr"] div,
@@ -45,117 +43,32 @@
 .marathi-text p, .marathi-text span, .marathi-text div,
 .marathi-text li, .marathi-text td, .marathi-text th {
   font-family: var(--marathi-body-font) !important;
-  line-height: 1.6;
-  letter-spacing: 0.005em;
+  line-height: 1.65;
+  letter-spacing: 0.003em;
 }
 
-/* Marathi button text */
+/* Buttons and UI */
 [lang="mr-IN"] button, [lang="mr-IN"] .btn,
 [lang="mr"] button, [lang="mr"] .btn,
 .marathi-text button, .marathi-text .btn {
   font-family: var(--marathi-primary-font) !important;
-  font-weight: 500;
+  font-weight: 600;
 }
 
-/* Marathi navigation */
-[lang="mr-IN"] .navbar, [lang="mr-IN"] .nav,
-[lang="mr"] .navbar, [lang="mr"] .nav,
-.marathi-text .navbar, .marathi-text .nav {
-  font-family: var(--marathi-primary-font) !important;
-  font-weight: 500;
-}
-
-/* Marathi form elements */
-[lang="mr-IN"] input, [lang="mr-IN"] textarea, [lang="mr-IN"] select,
-[lang="mr"] input, [lang="mr"] textarea, [lang="mr"] select,
-.marathi-text input, .marathi-text textarea, .marathi-text select {
-  font-family: var(--marathi-primary-font) !important;
-}
-
-/* Marathi placeholders */
-[lang="mr-IN"] input::placeholder, [lang="mr-IN"] textarea::placeholder,
-[lang="mr"] input::placeholder, [lang="mr"] textarea::placeholder,
-.marathi-text input::placeholder, .marathi-text textarea::placeholder {
-  font-family: var(--marathi-primary-font) !important;
-  opacity: 0.7;
-}
-
-/* Font size adjustments for better Marathi readability */
-[lang="mr-IN"], [lang="mr"], .marathi-text {
-  font-size: 1.02em; /* Slightly larger for better readability */
-}
-
-[lang="mr-IN"] h1, [lang="mr"] h1, .marathi-text h1 {
-  font-size: 2.2em;
+/* Hero typography scaling for Eczar */
+[lang="mr-IN"] .hero-title, [lang="mr"] .hero-title, .marathi-text .hero-title {
+  font-size: 2.4em;
   font-weight: 700;
 }
-
-[lang="mr-IN"] h2, [lang="mr"] h2, .marathi-text h2 {
-  font-size: 1.8em;
-  font-weight: 600;
-}
-
-[lang="mr-IN"] h3, [lang="mr"] h3, .marathi-text h3 {
-  font-size: 1.4em;
-  font-weight: 600;
-}
-
-[lang="mr-IN"] .hero-title, [lang="mr"] .hero-title,
-.marathi-text .hero-title {
-  font-size: 2.5em;
-  font-weight: 700;
-  line-height: 1.3;
-}
-
-[lang="mr-IN"] .hero-subtitle, [lang="mr"] .hero-subtitle,
-.marathi-text .hero-subtitle {
-  font-size: 1.3em;
+[lang="mr-IN"] .hero-subtitle, [lang="mr"] .hero-subtitle, .marathi-text .hero-subtitle {
+  font-size: 1.25em;
   font-weight: 500;
-  line-height: 1.4;
 }
 
-/* Card and content styling for Marathi */
-[lang="mr-IN"] .card, [lang="mr"] .card,
-.marathi-text .card {
-  font-family: var(--marathi-primary-font) !important;
-}
-
-[lang="mr-IN"] .testimonial-text, [lang="mr"] .testimonial-text,
-.marathi-text .testimonial-text {
-  font-family: var(--marathi-body-font) !important;
-  font-size: 1.05em;
-  line-height: 1.7;
-  font-style: italic;
-}
-
-/* Footer Marathi styling */
-[lang="mr-IN"] .footer, [lang="mr"] .footer,
-.marathi-text .footer {
-  font-family: var(--marathi-primary-font) !important;
-}
-
-/* Language toggle styling for Marathi text */
-.language-toggle .lang-btn {
-  font-family: var(--marathi-primary-font) !important;
-  font-weight: 600;
-}
-
-/* Responsive font scaling for Marathi */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  [lang="mr-IN"], [lang="mr"], .marathi-text {
-    font-size: 1em;
-  }
-  
-  [lang="mr-IN"] h1, [lang="mr"] h1, .marathi-text h1 {
-    font-size: 1.8em;
-  }
-  
-  [lang="mr-IN"] h2, [lang="mr"] h2, .marathi-text h2 {
-    font-size: 1.5em;
-  }
-  
-  [lang="mr-IN"] .hero-title, [lang="mr"] .hero-title,
-  .marathi-text .hero-title {
-    font-size: 2em;
-  }
+  [lang="mr-IN"], [lang="mr"], .marathi-text { font-size: 1em; }
+  [lang="mr-IN"] h1, [lang="mr"] h1, .marathi-text h1 { font-size: 1.9em; }
+  [lang="mr-IN"] h2, [lang="mr"] h2, .marathi-text h2 { font-size: 1.55em; }
+  [lang="mr-IN"] .hero-title, [lang="mr"] .hero-title, .marathi-text .hero-title { font-size: 2.05em; }
 }
