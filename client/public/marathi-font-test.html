@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>मराठी फॉन्ट चाचणी - Marathi Font Test</title>
     
-    <!-- Import Marathi fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Import enhanced Marathi fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mukti:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         body {
-            font-family: 'Noto Sans Devanagari', 'Eczar', 'Kalam', sans-serif;
+            font-family: 'Noto Sans Devanagari', 'Eczar', 'Kalam', 'Mangal', sans-serif;
             padding: 20px;
             line-height: 1.8;
             background-color: #f9f9f9;
@@ -29,9 +30,10 @@
         .font-example {
             font-size: 24px;
             margin: 10px 0;
-            padding: 10px;
+            padding: 15px;
             border-left: 4px solid #2d5016;
             background-color: #f5f1e8;
+            border-radius: 4px;
         }
         
         .problematic-before {
@@ -40,29 +42,49 @@
         }
         
         .fixed-after {
-            font-family: 'Noto Sans Devanagari', sans-serif !important;
-            font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'dlig' 1;
-            text-rendering: optimizeLegibility;
+            font-family: 'Noto Sans Devanagari', 'Mangal', sans-serif !important;
+            font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'dlig' 1, 'clig' 1;
+            text-rendering: geometricPrecision;
+            color: #2d5016;
+        }
+        
+        .ultra-complex-conjuncts {
+            font-family: 'Noto Sans Devanagari', 'Mangal', sans-serif !important;
+            font-weight: 500 !important;
+            font-feature-settings: 
+                'kern' 1,
+                'liga' 1,
+                'calt' 1,
+                'clig' 1,
+                'dlig' 1,
+                'ss01' 1,
+                'ss02' 1,
+                'ss03' 1,
+                'ss04' 1,
+                'ss05' 1;
+            text-rendering: geometricPrecision !important;
+            -webkit-font-smoothing: subpixel-antialiased;
+            letter-spacing: 0.02em;
+            word-spacing: 0.1em;
             color: #2d5016;
         }
         
         .complex-conjuncts {
-            font-family: 'Noto Sans Devanagari', sans-serif !important;
+            font-family: 'Noto Sans Devanagari', 'Mangal', sans-serif !important;
+            font-weight: 400;
             font-feature-settings: 
-                'kern' 1,           /* Enable kerning */
-                'liga' 1,           /* Enable ligatures */
-                'calt' 1,           /* Enable contextual alternates */
-                'dlig' 1,           /* Enable discretionary ligatures */
-                'ss01' 1,           /* Enable stylistic set 01 */
-                'ss02' 1,           /* Enable stylistic set 02 */
-                'ss03' 1;           /* Enable stylistic set 03 */
-            text-rendering: optimizeLegibility;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+                'kern' 1,
+                'liga' 1,
+                'calt' 1,
+                'clig' 1,
+                'dlig' 1,
+                'ss01' 1,
+                'ss02' 1,
+                'ss03' 1;
+            text-rendering: geometricPrecision;
+            -webkit-font-smoothing: subpixel-antialiased;
             letter-spacing: 0.01em;
-            word-spacing: 0.05em;
             color: #2d5016;
-            font-weight: 500;
         }
         
         h1, h2, h3 {
@@ -92,23 +114,60 @@
             border: 1px solid #81c784;
         }
         
+        .highlight {
+            background-color: #fff3e0;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+        
         @media (max-width: 768px) {
             .comparison {
                 grid-template-columns: 1fr;
+            }
+            
+            .font-example {
+                font-size: 20px;
             }
         }
     </style>
 </head>
 <body>
     <h1>मराठी फॉन्ट समस्या निराकरण चाचणी</h1>
-    <p>या पानावर आम्ही जटिल मराठी अक्षरांची चाचणी करत आहोत.</p>
+    <p>या पानावर आम्ही जटिल मराठी अक्षरांची चाचणी करत आहोत. विशेषत: <span class="highlight">महाराष्ट्र</span>, <span class="highlight">स्पर्धात्मक</span>, <span class="highlight">नैसर्गिक</span></p>
     
     <div class="test-section">
-        <h2>समस्याग्रस्त शब्द - Before & After</h2>
+        <h2>सर्वात समस्याग्रस्त शब्द: महाराष्ट्र</h2>
         
         <div class="comparison">
             <div class="before">
                 <h3>❌ समस्या (Arial Font)</h3>
+                <div class="font-example problematic-before">
+                    महाराष्ट्र<br>
+                    राष्ट्रिय<br>
+                    शास्त्रज्ञ<br>
+                    कृष्णमूर्ति
+                </div>
+            </div>
+            
+            <div class="after">
+                <h3>✅ निराकरण (Enhanced Noto Sans Devanagari)</h3>
+                <div class="font-example ultra-complex-conjuncts">
+                    महाराष्ट्र<br>
+                    राष्ट्रिय<br>
+                    शास्त्रज्ञ<br>
+                    कृष्णमूर्ति
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>इतर समस्याग्रस्त शब्द - Before & After</h2>
+        
+        <div class="comparison">
+            <div class="before">
+                <h3>❌ समस्या (System Font)</h3>
                 <div class="font-example problematic-before">
                     स्पर्धात्मक<br>
                     नैसर्गिक<br>
@@ -119,8 +178,8 @@
             </div>
             
             <div class="after">
-                <h3>✅ निराकरण (Noto Sans Devanagari)</h3>
-                <div class="font-example fixed-after">
+                <h3>✅ निराकरण (Optimized Rendering)</h3>
+                <div class="font-example complex-conjuncts">
                     स्पर्धात्मक<br>
                     नैसर्गिक<br>
                     आध्यात्मिक<br>
@@ -132,68 +191,100 @@
     </div>
     
     <div class="test-section">
-        <h2>जटिल संयुक्ताक्षरे - Complex Conjuncts</h2>
-        <div class="font-example complex-conjuncts">
-            <strong>तुमच्या वेबसाइटवरील हे शब्द:</strong><br><br>
-            स्पर्धात्मक दर<br>
-            नैसर्गिक उपाय<br>
-            गुणवत्तापूर्ण उत्पादने<br>
-            शाश्वत शेती<br>
-            आध्यात्मिक विकास<br>
-            व्यावसायिक सेवा<br>
-            प्रमाणित जैविक खते
+        <h2>जटिल संयुक्ताक्षरे - Complex Conjuncts Test</h2>
+        <div class="font-example ultra-complex-conjuncts">
+            <strong>वेबसाइटवरील वास्तविक मजकूर:</strong><br><br>
+            
+            🌿 <strong>जैविक आणि नैसर्गिक उपाय</strong><br>
+            शाश्वत शेतीसाठी प्रमाणित जैविक खते, जैव कीटकनाशके आणि नैसर्गिक शेती पद्धतींची संपूर्ण श्रेणी<br><br>
+            
+            💰 <strong>स्पर्धात्मक दर</strong><br>
+            शेतकऱ्यांसाठी सर्वोत्तम बाजार दर, आकर्षक मोठ्या प्रमाणावरील सूट, हंगामी ऑफर आणि लवचिक पेमेंट पर्याय<br><br>
+            
+            🚚 <strong>घरपोच वितरण सेवा</strong><br>
+            महाराष्ट्रातील शेतकऱ्यांसाठी विनामूल्य घर डिलिव्हरी सेवा
         </div>
     </div>
     
     <div class="test-section">
         <h2>वेबसाइटमध्ये वापरण्यासाठी CSS Classes</h2>
         <p>या CSS classes वापरा:</p>
-        <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; font-family: monospace;">
-            &lt;div class="marathi-text"&gt;स्पर्धात्मक&lt;/div&gt;<br>
-            &lt;div class="complex-conjuncts"&gt;नैसर्गिक&lt;/div&gt;<br>
-            &lt;div lang="mr"&gt;आध्यात्मिक&lt;/div&gt;
-        </div>
-    </div>
-    
-    <div class="test-section">
-        <h2>सर्व फॉन्ट तुलना</h2>
-        
-        <h3>Noto Sans Devanagari (शिफारसीत)</h3>
-        <div class="font-example" style="font-family: 'Noto Sans Devanagari', sans-serif;">
-            स्पर्धात्मक नैसर्गिक आध्यात्मिक व्यावसायिक
-        </div>
-        
-        <h3>Eczar (वैकल्पिक)</h3>
-        <div class="font-example" style="font-family: 'Eczar', serif;">
-            स्पर्धात्मक नैसर्गिक आध्यात्मिक व्यावसायिक
-        </div>
-        
-        <h3>Kalam (हस्तलिखित शैली)</h3>
-        <div class="font-example" style="font-family: 'Kalam', cursive;">
-            स्पर्धात्मक नैसर्गिक आध्यात्मिक व्यावसायिक
-        </div>
-    </div>
-    
-    <div class="test-section">
-        <h2>तुमच्या वेबसाइटवरील वास्तविक मजकूर</h2>
-        <div class="font-example complex-conjuncts">
-            <strong>🌿 जैविक आणि नैसर्गिक उपाय</strong><br>
-            शाश्वत शेतीसाठी प्रमाणित जैविक खते, जैव कीटकनाशके आणि नैसर्गिक शेती पद्धतींची संपूर्ण श्रेणी<br><br>
+        <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; font-family: monospace; font-size: 14px;">
+            <!-- महाराष्ट्र सारख्या अति जटिल शब्दांसाठी --><br>
+            &lt;span class="ultra-complex-conjuncts"&gt;महाराष्ट्र&lt;/span&gt;<br>
+            &lt;span class="word-maharashtra"&gt;महाराष्ट्र&lt;/span&gt;<br><br>
             
-            <strong>💰 स्पर्धात्मक दर</strong><br>
-            शेतकऱ्यांसाठी सर्वोत्तम बाजार दर, आकर्षक मोठ्या प्रमाणावरील सूट, हंगामी ऑफर आणि लवचिक पेमेंट पर्याय
+            <!-- इतर जटिल शब्दांसाठी --><br>
+            &lt;div class="complex-conjuncts"&gt;स्पर्धात्मक&lt;/div&gt;<br>
+            &lt;div class="complex-conjuncts"&gt;नैसर्गिक&lt;/div&gt;<br><br>
+            
+            <!-- सर्वसामान्य मराठी मजकूर --><br>
+            &lt;div class="marathi-text"&gt;सामान्य मराठी मजकूर&lt;/div&gt;<br>
+            &lt;div lang="mr"&gt;आपोआप मराठी बारे लागू होते&lt;/div&gt;
         </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>सर्व फॉन्ट तुलना आणि दर्जा</h2>
+        
+        <h3>1. Noto Sans Devanagari (सर्वोत्तम - शिफारसीत)</h3>
+        <div class="font-example ultra-complex-conjuncts" style="font-family: 'Noto Sans Devanagari', sans-serif;">
+            महाराष्ट्र • स्पर्धात्मक • नैसर्गिक • आध्यात्मिक • व्यावसायिक • राष्ट्रिय • शास्त्रज्ञ
+        </div>
+        
+        <h3>2. Mangal (वैकल्पिक - Windows मध्ये सामान्य)</h3>
+        <div class="font-example" style="font-family: 'Mangal', sans-serif; font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;">
+            महाराष्ट्र • स्पर्धात्मक • नैसर्गिक • आध्यात्मिक • व्यावसायिक
+        </div>
+        
+        <h3>3. Eczar (सेरिफ - शिरोगण्यांसाठी)</h3>
+        <div class="font-example" style="font-family: 'Eczar', serif;">
+            महाराष्ट्र • स्पर्धात्मक • नैसर्गिक • आध्यात्मिक • व्यावसायिक
+        </div>
+        
+        <h3>4. Kalam (हस्तलिखित शैली)</h3>
+        <div class="font-example" style="font-family: 'Kalam', cursive;">
+            महाराष्ट्र • स्पर्धात्मक • नैसर्गिक • आध्यात्मिक • व्यावसायिक
+        </div>
+    </div>
+    
+    <div class="test-section" style="background: linear-gradient(135deg, #e8f5e8, #f5f1e8); border: 2px solid #2d5016;">
+        <h2 style="color: #2d5016; text-align: center;">✅ मुख्य निराकरण परीक्षा</h2>
+        <div class="font-example ultra-complex-conjuncts" style="text-align: center; font-size: 28px; background: white; margin: 15px 0;">
+            <strong>कन्हैया कृषी - महाराष्ट्रातील स्पर्धात्मक नैसर्गिक शेती</strong>
+        </div>
+        <p style="text-align: center; color: #2d5016;">
+            जर वरील सर्व शब्द स्पष्ट आणि योग्यरित्या चांगल्या दिसत आहेत, तर प्रभावी दीक्षा पूर्ण! 🎉
+        </p>
     </div>
     
     <script>
-        // Add dynamic font loading check
+        // Enhanced font loading check with detailed logging
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('📝 मराठी फॉन्ट टेस्ट पेज लोड झाले!');
+            
             // Check if fonts are loaded
             if (document.fonts && document.fonts.ready) {
                 document.fonts.ready.then(function() {
-                    console.log('सर्व फॉन्ट लोड झाले!');
+                    console.log('✅ सर्व फॉन्ट यशस्वीरित्या लोड झाले!');
+                    
+                    // Test if specific fonts are available
+                    const testFonts = ['Noto Sans Devanagari', 'Mangal', 'Eczar', 'Kalam'];
+                    testFonts.forEach(font => {
+                        if (document.fonts.check(`16px "${font}"`)) {
+                            console.log(`✅ ${font} फॉन्ट उपलब्ध आहे`);
+                        } else {
+                            console.log(`❌ ${font} फॉन्ट उपलब्ध नाही`);
+                        }
+                    });
                 });
             }
+            
+            // Test complex character rendering
+            setTimeout(() => {
+                const testWords = ['महाराष्ट्र', 'स्पर्धात्मक', 'नैसर्गिक'];
+                console.log('🔍 जटिल शब्द परीक्षा:', testWords.join(' | '));
+            }, 1000);
         });
     </script>
 </body>
