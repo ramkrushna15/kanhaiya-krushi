@@ -1,23 +1,37 @@
 // ==========================================
 // client/src/pages/About.jsx
 // ==========================================
-import SEO from '../components/SEO';
 import React from 'react';
+import { useTranslation } from '../hooks/useTranslation';
+import SEO from '../components/SEO';
 import './About.css';
 
 const About = () => {
+  const { t, isLoaded } = useTranslation();
+
+  // Show loading state while translations load
+  if (!isLoaded) {
+    return (
+      <div className="loading">
+        <div className="spinner"></div>
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="about-page">
       <SEO
-        title="About Us - Kanhaiya Krushi"
-        description="Learn about Kanhaiya Krushi, your trusted partner in sustainable agriculture with over 10 years of experience."
+        title={`${t('about.title')} - ${t('nav.brand')}`}
+        description={t('about.subtitle')}
         url="https://kanhaiyakrushi.com/about"
       />
+      
       {/* Page Header */}
       <section className="page-header">
         <div className="container">
-          <h1>About Kanhaiya Krushi</h1>
-          <p>Growing together towards a sustainable future</p>
+          <h1>{t('about.title')}</h1>
+          <p>{t('about.pageSubtitle')}</p>
         </div>
       </section>
 
@@ -26,22 +40,19 @@ const About = () => {
         <div className="container">
           <div className="about-content">
             <div className="about-text">
-              <h2>Our Story</h2>
+              <h2>{t('about.story.title')}</h2>
               <p>
-                Founded with a simple mission: to provide farmers with
-                high-quality agricultural products and expert guidance. Over the years, we've grown
-                into a trusted partner for thousands of farmers across Maharashtra and beyond.
+                {t('about.story.paragraph1')}
               </p>
               <p>
-                We believe in sustainable farming practices that not only increase yields but also
-                protect our environment for future generations. Our team of agricultural experts
-                works tirelessly to source the best products and develop innovative farming solutions.
+                {t('about.story.paragraph2')}
               </p>
             </div>
             <div className="about-image">
               <img
                 src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600"
-                alt="Farming"
+                alt="Modern Sustainable Farming"
+                loading="lazy"
               />
             </div>
           </div>
@@ -54,18 +65,16 @@ const About = () => {
           <div className="mission-vision-grid">
             <div className="mission-card">
               <div className="card-icon">🎯</div>
-              <h3>Our Mission</h3>
+              <h3>{t('about.mission.title')}</h3>
               <p>
-                To empower farmers with quality products, innovative solutions, and expert knowledge
-                that enable sustainable and profitable farming practices.
+                {t('about.mission.description')}
               </p>
             </div>
             <div className="vision-card">
               <div className="card-icon">🌟</div>
-              <h3>Our Vision</h3>
+              <h3>{t('about.vision.title')}</h3>
               <p>
-                To be India's most trusted agricultural partner, leading the way in sustainable
-                farming and contributing to food security for all.
+                {t('about.vision.description')}
               </p>
             </div>
           </div>
@@ -75,23 +84,23 @@ const About = () => {
       {/* Values */}
       <section className="section">
         <div className="container">
-          <h2 className="section-title text-center">Our Core Values</h2>
+          <h2 className="section-title text-center">{t('about.values.title')}</h2>
           <div className="values-grid">
             <div className="value-card">
-              <h3>🌱 Sustainability</h3>
-              <p>Promoting eco-friendly farming practices</p>
+              <h3>🌱 {t('about.values.sustainability.title')}</h3>
+              <p>{t('about.values.sustainability.description')}</p>
             </div>
             <div className="value-card">
-              <h3>✓ Quality</h3>
-              <p>Never compromising on product standards</p>
+              <h3>✓ {t('about.values.quality.title')}</h3>
+              <p>{t('about.values.quality.description')}</p>
             </div>
             <div className="value-card">
-              <h3>🤝 Trust</h3>
-              <p>Building lasting relationships with farmers</p>
+              <h3>🤝 {t('about.values.trust.title')}</h3>
+              <p>{t('about.values.trust.description')}</p>
             </div>
             <div className="value-card">
-              <h3>💡 Innovation</h3>
-              <p>Embracing new agricultural technologies</p>
+              <h3>💡 {t('about.values.innovation.title')}</h3>
+              <p>{t('about.values.innovation.description')}</p>
             </div>
           </div>
         </div>
@@ -103,19 +112,19 @@ const About = () => {
           <div className="stats-grid">
             <div className="stat-item">
               <div className="stat-number">5,000+</div>
-              <div className="stat-label">Happy Farmers</div>
+              <div className="stat-label">{t('about.stats.farmers')}</div>
             </div>
             <div className="stat-item">
               <div className="stat-number">300+</div>
-              <div className="stat-label">Products</div>
+              <div className="stat-label">{t('about.stats.products')}</div>
             </div>
             <div className="stat-item">
               <div className="stat-number">10+</div>
-              <div className="stat-label">Years Experience</div>
+              <div className="stat-label">{t('about.stats.experience')}</div>
             </div>
             <div className="stat-item">
               <div className="stat-number">15+</div>
-              <div className="stat-label">Districts Covered</div>
+              <div className="stat-label">{t('about.stats.districts')}</div>
             </div>
           </div>
         </div>
