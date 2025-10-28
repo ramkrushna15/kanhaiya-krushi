@@ -12,8 +12,9 @@ import Services from './pages/Services';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 import './App.css';
-import './styles/marathi-fonts.css'; // Import Marathi font styles 
-import './marathi-fix.css'; // Import specialized Marathi typography fixes
+import './styles/marathi-fonts.css';
+import './marathi-fix.css';
+import './styles/testimonials-devanagari.css'; // Force Devanagari in testimonials
 
 function App() {
   return (
