@@ -25,7 +25,7 @@ const Navbar = () => {
             </div>
             <div className="logo-text">
               <span className="logo-title">Kanhaiya Krushi</span>
-              <span className="logo-subtitle">Loading...</span>
+              <span className="logo-subtitle">SUSTAINABLE AGRICULTURE</span>
             </div>
           </Link>
         </div>
@@ -41,8 +41,9 @@ const Navbar = () => {
             <img src={logo} alt="Kanhaiya Krushi Logo" className="logo-image" />
           </div>
           <div className="logo-text">
-            <span className="logo-title">{t('nav.brand')}</span>
-            <span className="logo-subtitle">{t('nav.tagline')}</span>
+            {/* Keep brand and tagline always in English for both languages */}
+            <span className="logo-title en-only">Kanhaiya Krushi</span>
+            <span className="logo-subtitle en-only">SUSTAINABLE AGRICULTURE</span>
           </div>
         </Link>
 
