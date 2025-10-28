@@ -27,12 +27,12 @@ const LanguageToggle = ({ className = '' }) => {
       </button>
       <span className="lang-separator">|</span>
       <button
-        className={`lang-btn ${language === 'mr' ? 'active' : ''}`}
+        className={`lang-btn ${language === 'mr' ? 'active' : ''} marathi-text`}
         onClick={() => handleLanguageChange('mr')}
         aria-label="मराठी भाषेत स्विच करा"
         title="मराठी"
       >
-        मर
+        मराठी
       </button>
     </div>
   );
