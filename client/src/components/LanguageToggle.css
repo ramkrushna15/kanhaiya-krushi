@@ -1,0 +1,98 @@
+.language-toggle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: inherit;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.lang-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.lang-btn.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  font-weight: 700;
+  color: #fff;
+}
+
+.lang-separator {
+  color: inherit;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .language-toggle {
+    gap: 3px;
+  }
+  
+  .lang-btn {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .lang-separator {
+    font-size: 12px;
+  }
+}
+
+/* For navbar integration */
+.navbar .language-toggle {
+  margin-left: auto;
+}
+
+.navbar .language-toggle .lang-btn {
+  color: #fff;
+}
+
+.navbar .language-toggle .lang-btn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.navbar .language-toggle .lang-btn.active {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.navbar .language-toggle .lang-separator {
+  color: #fff;
+}
+
+/* For footer integration */
+.footer .language-toggle {
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.footer .language-toggle .lang-btn {
+  color: #666;
+}
+
+.footer .language-toggle .lang-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #333;
+}
+
+.footer .language-toggle .lang-btn.active {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #000;
+}
+
+.footer .language-toggle .lang-separator {
+  color: #666;
+}
