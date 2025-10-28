@@ -1,3 +1,6 @@
+/* Import Marathi/Devanagari fonts */
+@import url('https://fonts.googleapis.com/css2?family=Mukti:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Eczar:wght@400;500;600;700&display=swap');
+
 /* Root Variables */
 :root {
   --primary-green: #2d5016;
@@ -24,18 +27,42 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  /* Updated font-family with proper Marathi support */
+  font-family: 'Noto Sans Devanagari', 'Eczar', 'Mukti', 'Kalam', 'Marathi Typing', 'Mangal', 'DevLys 010', 'Kruti Dev 010', 'Marathi Unicode', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--text-primary);
   background-color: #ffffff;
+  /* Improve text rendering for Devanagari script */
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  font-variant-ligatures: common-ligatures contextual;
+  /* Support for complex scripts */
+  unicode-bidi: embed;
+}
+
+/* Specific font support for Marathi text */
+:lang(mr), [lang="mr"], .marathi-text {
+  font-family: 'Noto Sans Devanagari', 'Eczar', 'Mukti', 'Kalam', 'Marathi Typing', 'Mangal', 'DevLys 010', 'Kruti Dev 010', 'Marathi Unicode', sans-serif;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'dlig' 1, 'ss01' 1;
+  font-variant-ligatures: common-ligatures contextual discretionary-ligatures;
+  text-rendering: optimizeLegibility;
+  /* Better spacing for complex conjuncts */
+  letter-spacing: 0.01em;
+}
+
+/* Ensure proper rendering for complex characters */
+.complex-marathi {
+  font-family: 'Noto Sans Devanagari', 'Eczar', sans-serif;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'dlig' 1, 'ss01' 1, 'ss02' 1;
+  font-variant-ligatures: common-ligatures contextual discretionary-ligatures;
+  text-rendering: optimizeLegibility;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 /* Container */
@@ -278,4 +305,30 @@ img {
 @media (max-width: 768px) {
   .section { padding-block: 32px; }
   .page-header { padding-block: 28px; }
+}
+
+/* Additional fixes for complex Marathi text rendering */
+.features-grid .feature-card h3,
+.services-grid .service-card h3,
+.testimonials .testimonial h4 {
+  font-family: 'Noto Sans Devanagari', 'Eczar', sans-serif;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'dlig' 1;
+  text-rendering: optimizeLegibility;
+}
+
+/* Ensure proper line height for complex characters */
+.marathi-text,
+:lang(mr) {
+  line-height: 1.6;
+  word-spacing: 0.1em;
+}
+
+/* Fix for specific problematic conjuncts */
+.problematic-text {
+  font-family: 'Noto Sans Devanagari', 'Eczar', sans-serif !important;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'dlig' 1, 'ss01' 1, 'ss02' 1, 'ss03' 1;
+  font-variant-ligatures: common-ligatures contextual discretionary-ligatures;
+  text-rendering: optimizeLegibility;
+  -webkit-font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'dlig' 1;
+  -moz-font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'dlig' 1;
 }
