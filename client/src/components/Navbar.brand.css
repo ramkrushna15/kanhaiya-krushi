@@ -1,0 +1,3 @@
+.en-only { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important; text-transform: none; letter-spacing: 0.5px; }
+/* Ensure Marathi styles don’t override brand */
+.logo-text .en-only { font-feature-settings: normal !important; font-variant-ligatures: normal !important; }
