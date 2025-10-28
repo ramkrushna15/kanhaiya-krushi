@@ -1,10 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/logo.png'; // Import logo from assets
+import { useTranslation } from '../hooks/useTranslation';
+import LanguageToggle from './LanguageToggle';
+import logo from '../assets/logo.png';
 import './Footer.css';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { t, isLoaded } = useTranslation();
+
+  // Show basic structure while translations are loading
+  if (!isLoaded) {
+    return (
+      <footer className="footer">
+        <div className="container">
+          <div className="footer-content">
+            <div className="footer-section">
+              <div className="footer-logo">
+                <img 
+                  src={logo} 
+                  alt="Kanhaiya Krushi Logo" 
+                  className="footer-logo-image"
+                />
+                <div>
+                  <h3>Kanhaiya Krushi</h3>
+                  <p>Loading...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    );
+  }
 
   return (
     <footer className="footer">
@@ -19,13 +47,12 @@ const Footer = () => {
                 className="footer-logo-image"
               />
               <div>
-                <h3>Kanhaiya Krushi</h3>
-                <p>Sustainable Agriculture Solutions</p>
+                <h3>{t('nav.brand')}</h3>
+                <p>{t('nav.tagline')}</p>
               </div>
             </div>
             <p className="footer-description">
-              Your trusted partner in sustainable agriculture. We provide quality products
-              and expert guidance for successful farming.
+              {t('footer.description')}
             </p>
             <div className="footer-social">
               <a href="https://www.facebook.com/kanhaiyakrushi" target="_blank" rel="noopener noreferrer" className="social-icon facebook" aria-label="Facebook">
@@ -58,56 +85,60 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="footer-section">
-            <h4>Quick Links</h4>
+            <h4>{t('footer.quickLinks')}</h4>
             <ul className="footer-links">
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/about">About Us</Link></li>
-              <li><Link to="/products">Products</Link></li>
-              <li><Link to="/services">Services</Link></li>
-              <li><Link to="/contact">Contact</Link></li>
+              <li><Link to="/">{t('nav.home')}</Link></li>
+              <li><Link to="/about">{t('nav.about')}</Link></li>
+              <li><Link to="/products">{t('nav.products')}</Link></li>
+              <li><Link to="/services">{t('nav.services')}</Link></li>
+              <li><Link to="/contact">{t('nav.contact')}</Link></li>
             </ul>
           </div>
 
           {/* Products */}
           <div className="footer-section">
-            <h4>Our Products</h4>
+            <h4>{t('footer.ourProducts')}</h4>
             <ul className="footer-links">
-              <li><Link to="/products">Seeds</Link></li>
-              <li><Link to="/products">Fertilizers</Link></li>
-              <li><Link to="/products">Pesticides</Link></li>
-              <li><Link to="/products">Equipment</Link></li>
-              <li><Link to="/products">Organic Products</Link></li>
+              <li><Link to="/products">{t('footer.products.seeds')}</Link></li>
+              <li><Link to="/products">{t('footer.products.fertilizers')}</Link></li>
+              <li><Link to="/products">{t('footer.products.pesticides')}</Link></li>
+              <li><Link to="/products">{t('footer.products.equipment')}</Link></li>
+              <li><Link to="/products">{t('footer.products.organic')}</Link></li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div className="footer-section">
-            <h4>Contact Us</h4>
+            <h4>{t('footer.contactUs')}</h4>
             <div className="footer-contact">
               <p>
-                <strong>📍 Address:</strong><br />
-                Near Market Yard, Jeur, Karmala, Solapur<br />
-                Maharashtra, India
+                <strong>📍 {t('footer.address')}</strong><br />
+                {t('footer.addressText')}
               </p>
               <p>
-                <strong>📞 Phone:</strong><br />
+                <strong>📞 {t('footer.phone')}</strong><br />
                 +91 9767038479
               </p>
               <p>
-                <strong>✉️ Email:</strong><br />
+                <strong>✉️ {t('footer.email')}</strong><br />
                 info@kanhaiyakrushi.com
               </p>
             </div>
           </div>
         </div>
 
+        {/* Language Toggle */}
+        <div className="footer-language">
+          <LanguageToggle />
+        </div>
+
         {/* Footer Bottom */}
         <div className="footer-bottom">
-          <p>&copy; {currentYear} Kanhaiya Krushi. All rights reserved.</p>
+          <p>&copy; {currentYear} {t('footer.allRightsReserved')}</p>
           <div className="footer-bottom-links">
-            <a href="#">Privacy Policy</a>
+            <a href="#">{t('footer.privacyPolicy')}</a>
             <span>|</span>
-            <a href="#">Terms & Conditions</a>
+            <a href="#">{t('footer.termsConditions')}</a>
           </div>
         </div>
       </div>
