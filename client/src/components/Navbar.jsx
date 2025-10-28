@@ -1,27 +1,48 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useTranslation } from '../hooks/useTranslation';
+import LanguageToggle from './LanguageToggle';
 import './Navbar.css';
-import logo from '../assets/logo.png'; // <-- import your PNG file
+import logo from '../assets/logo.png';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { t, isLoaded } = useTranslation();
 
   const isActive = (path) => location.pathname === path;
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+  // Show basic structure while translations are loading
+  if (!isLoaded) {
+    return (
+      <nav className="navbar">
+        <div className="container navbar-container">
+          <Link to="/" className="navbar-logo">
+            <div className="logo-icon">
+              <img src={logo} alt="Kanhaiya Krushi Logo" className="logo-image" />
+            </div>
+            <div className="logo-text">
+              <span className="logo-title">Kanhaiya Krushi</span>
+              <span className="logo-subtitle">Loading...</span>
+            </div>
+          </Link>
+        </div>
+      </nav>
+    );
+  }
+
   return (
     <nav className="navbar">
       <div className="container navbar-container">
         <Link to="/" className="navbar-logo">
-          {/* Use the PNG logo instead of emoji */}
           <div className="logo-icon">
             <img src={logo} alt="Kanhaiya Krushi Logo" className="logo-image" />
           </div>
           <div className="logo-text">
-            <span className="logo-title">Kanhaiya Krushi</span>
-            <span className="logo-subtitle">Sustainable Agriculture</span>
+            <span className="logo-title">{t('nav.brand')}</span>
+            <span className="logo-subtitle">{t('nav.tagline')}</span>
           </div>
         </Link>
 
@@ -36,7 +57,7 @@ const Navbar = () => {
               className={`navbar-link ${isActive('/') ? 'active' : ''}`}
               onClick={() => setIsMenuOpen(false)}
             >
-              Home
+              {t('nav.home')}
             </Link>
           </li>
           <li>
@@ -45,7 +66,7 @@ const Navbar = () => {
               className={`navbar-link ${isActive('/about') ? 'active' : ''}`}
               onClick={() => setIsMenuOpen(false)}
             >
-              About
+              {t('nav.about')}
             </Link>
           </li>
           <li>
@@ -54,7 +75,7 @@ const Navbar = () => {
               className={`navbar-link ${isActive('/products') ? 'active' : ''}`}
               onClick={() => setIsMenuOpen(false)}
             >
-              Products
+              {t('nav.products')}
             </Link>
           </li>
           <li>
@@ -63,7 +84,7 @@ const Navbar = () => {
               className={`navbar-link ${isActive('/services') ? 'active' : ''}`}
               onClick={() => setIsMenuOpen(false)}
             >
-              Services
+              {t('nav.services')}
             </Link>
           </li>
           <li>
@@ -72,8 +93,11 @@ const Navbar = () => {
               className="navbar-link navbar-btn"
               onClick={() => setIsMenuOpen(false)}
             >
-              Contact Us
+              {t('nav.contact')}
             </Link>
+          </li>
+          <li className="navbar-lang">
+            <LanguageToggle />
           </li>
         </ul>
       </div>
