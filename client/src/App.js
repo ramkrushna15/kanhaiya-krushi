@@ -12,6 +12,7 @@ import Services from './pages/Services';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 import './App.css';
+import './styles/marathi-fonts.css'; // Import Marathi font styles
 
 function App() {
   return (
