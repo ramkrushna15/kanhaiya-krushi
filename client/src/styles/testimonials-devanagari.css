@@ -1,0 +1,17 @@
+/* Testimonials-specific Devanagari force rules */
+.testimonials-section,
+.testimonials-section * {
+  font-family: 'Noto Sans Devanagari', 'Mangal', sans-serif !important;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'clig' 1, 'dlig' 1 !important;
+  text-rendering: geometricPrecision !important;
+}
+
+.testimonial-text,
+.testimonial-author,
+.testimonial-author span,
+.testimonial-author strong {
+  letter-spacing: 0.01em;
+  line-height: 1.8;
+}
+
+/* Keep previous rules below (file already contains broader classes) */
