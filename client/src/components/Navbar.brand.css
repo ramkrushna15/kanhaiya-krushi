@@ -1,3 +1,16 @@
-.en-only { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important; text-transform: none; letter-spacing: 0.5px; }
-/* Ensure Marathi styles don’t override brand */
-.logo-text .en-only { font-feature-settings: normal !important; font-variant-ligatures: normal !important; }
+.en-only {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+  font-size: 1.5rem !important;   /* match .logo-title */
+  font-weight: 700 !important;
+  letter-spacing: 0.5px;
+  font-feature-settings: normal !important;
+  font-variant-ligatures: normal !important;
+  line-height: 1.2;
+}
+.logo-subtitle.en-only {
+  font-size: 0.75rem !important;  /* match .logo-subtitle */
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
