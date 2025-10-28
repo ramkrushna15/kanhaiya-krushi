@@ -15,6 +15,7 @@ import './App.css';
 import './styles/marathi-fonts.css';
 import './marathi-fix.css';
 import './styles/testimonials-devanagari.css'; // Force Devanagari in testimonials
+import './styles/product-improvements.css'; // New CSS improvements
 
 function App() {
   return (
