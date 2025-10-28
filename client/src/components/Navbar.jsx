@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from '../hooks/useTranslation';
 import LanguageToggle from './LanguageToggle';
 import './Navbar.css';
+import './Navbar.brand.css';
 import logo from '../assets/logo.png';
 
 const Navbar = () => {
@@ -14,7 +15,6 @@ const Navbar = () => {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  // Show basic structure while translations are loading
   if (!isLoaded) {
     return (
       <nav className="navbar">
@@ -24,8 +24,8 @@ const Navbar = () => {
               <img src={logo} alt="Kanhaiya Krushi Logo" className="logo-image" />
             </div>
             <div className="logo-text">
-              <span className="logo-title">Kanhaiya Krushi</span>
-              <span className="logo-subtitle">SUSTAINABLE AGRICULTURE</span>
+              <span className="logo-title en-only">Kanhaiya Krushi</span>
+              <span className="logo-subtitle en-only">SUSTAINABLE AGRICULTURE</span>
             </div>
           </Link>
         </div>
@@ -41,7 +41,6 @@ const Navbar = () => {
             <img src={logo} alt="Kanhaiya Krushi Logo" className="logo-image" />
           </div>
           <div className="logo-text">
-            {/* Keep brand and tagline always in English for both languages */}
             <span className="logo-title en-only">Kanhaiya Krushi</span>
             <span className="logo-subtitle en-only">SUSTAINABLE AGRICULTURE</span>
           </div>
@@ -53,47 +52,27 @@ const Navbar = () => {
 
         <ul className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
           <li>
-            <Link 
-              to="/" 
-              className={`navbar-link ${isActive('/') ? 'active' : ''}`}
-              onClick={() => setIsMenuOpen(false)}
-            >
+            <Link to="/" className={`navbar-link ${isActive('/') ? 'active' : ''}`} onClick={() => setIsMenuOpen(false)}>
               {t('nav.home')}
             </Link>
           </li>
           <li>
-            <Link 
-              to="/about" 
-              className={`navbar-link ${isActive('/about') ? 'active' : ''}`}
-              onClick={() => setIsMenuOpen(false)}
-            >
+            <Link to="/about" className={`navbar-link ${isActive('/about') ? 'active' : ''}`} onClick={() => setIsMenuOpen(false)}>
               {t('nav.about')}
             </Link>
           </li>
           <li>
-            <Link 
-              to="/products" 
-              className={`navbar-link ${isActive('/products') ? 'active' : ''}`}
-              onClick={() => setIsMenuOpen(false)}
-            >
+            <Link to="/products" className={`navbar-link ${isActive('/products') ? 'active' : ''}`} onClick={() => setIsMenuOpen(false)}>
               {t('nav.products')}
             </Link>
           </li>
           <li>
-            <Link 
-              to="/services" 
-              className={`navbar-link ${isActive('/services') ? 'active' : ''}`}
-              onClick={() => setIsMenuOpen(false)}
-            >
+            <Link to="/services" className={`navbar-link ${isActive('/services') ? 'active' : ''}`} onClick={() => setIsMenuOpen(false)}>
               {t('nav.services')}
             </Link>
           </li>
           <li>
-            <Link 
-              to="/contact" 
-              className="navbar-link navbar-btn"
-              onClick={() => setIsMenuOpen(false)}
-            >
+            <Link to="/contact" className="navbar-link navbar-btn" onClick={() => setIsMenuOpen(false)}>
               {t('nav.contact')}
             </Link>
           </li>
