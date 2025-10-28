@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getProductById } from '../services/api';
 import { useTranslation } from '../hooks/useTranslation';
+import { formatPrice, formatStock, formatTags, formatFeatures, formatQuantity } from '../utils/formatters';
 import SEO from '../components/SEO';
 import './ProductDetail.css';
 
@@ -32,8 +33,13 @@ const ProductDetail = () => {
   };
 
   const handleQuantityChange = (type) => {
-    if (type === 'increase') setQuantity((prev) => prev + 1);
-    else if (type === 'decrease' && quantity > 1) setQuantity((prev) => prev - 1);
+    const qtyData = formatQuantity(quantity, { min: 1, max: 100 });
+    
+    if (type === 'increase' && qtyData.canIncrease) {
+      setQuantity(prev => prev + qtyData.step);
+    } else if (type === 'decrease' && qtyData.canDecrease) {
+      setQuantity(prev => prev - qtyData.step);
+    }
   };
 
   if (loading) {
@@ -64,6 +70,13 @@ const ProductDetail = () => {
       </div>
     );
   }
+
+  // Format product data using utility functions
+  const formattedPrice = formatPrice(product.price, product.unit, { separator: ' / ' });
+  const stockInfo = formatStock(product.stock, { showQuantity: true });
+  const cleanTags = formatTags(product.tags, { maxTags: 10 });
+  const cleanFeatures = formatFeatures(product.features, { maxFeatures: 5 });
+  const qtyData = formatQuantity(quantity, { min: 1, max: Math.min(100, product.stock || 1) });
 
   return (
     <div className="product-detail-page">
@@ -117,39 +130,36 @@ const ProductDetail = () => {
               <h1 className="product-title-detail">{product.name}</h1>
 
               <div className="product-price-section">
-                <span className="product-price-detail">₹{product.price}</span>
-                <span className="product-unit-detail">/ {product.unit}</span>
+                <span className="product-price-detail">{formattedPrice}</span>
               </div>
 
               <div className="product-stock-section">
-                {product.stock > 0 ? (
-                  <span className="in-stock-detail">✓ In Stock ({product.stock})</span>
-                ) : (
-                  <span className="out-of-stock-detail">✗ Out of Stock</span>
-                )}
+                <span className={`stock-indicator ${stockInfo.className}`}>
+                  {stockInfo.indicator} {stockInfo.text}
+                </span>
               </div>
 
               <p className="product-description-detail">{product.description}</p>
 
               {/* Features */}
-              {Array.isArray(product.features) && product.features.length > 0 && (
+              {cleanFeatures.length > 0 && (
                 <div className="product-features-section">
                   <h3>Key Features:</h3>
                   <ul className="product-features-detail">
-                    {product.features.map((feature, index) => (
-                      <li key={index}>✓ {feature}</li>
+                    {cleanFeatures.map((feature, index) => (
+                      <li key={index}>{feature}</li>
                     ))}
                   </ul>
                 </div>
               )}
 
               {/* Tags */}
-              {Array.isArray(product.tags) && product.tags.length > 0 && (
+              {cleanTags.length > 0 && (
                 <div className="product-tags-section">
                   <h4>Tags:</h4>
                   <div className="product-tags">
-                    {product.tags.map((tag, index) => (
-                      <span key={index} className="product-tag">#{tag}</span>
+                    {cleanTags.map((tag, index) => (
+                      <span key={index} className="product-tag">{tag}</span>
                     ))}
                   </div>
                 </div>
@@ -159,9 +169,23 @@ const ProductDetail = () => {
               <div className="quantity-section">
                 <label>Quantity:</label>
                 <div className="quantity-controls">
-                  <button className="quantity-btn" onClick={() => handleQuantityChange('decrease')}>-</button>
-                  <span className="quantity-value">{quantity}</span>
-                  <button className="quantity-btn" onClick={() => handleQuantityChange('increase')}>+</button>
+                  <button 
+                    className={`quantity-btn ${!qtyData.canDecrease ? 'disabled' : ''}`}
+                    onClick={() => handleQuantityChange('decrease')}
+                    disabled={!qtyData.canDecrease}
+                    aria-label="Decrease quantity"
+                  >
+                    -
+                  </button>
+                  <span className="quantity-value">{qtyData.current}</span>
+                  <button 
+                    className={`quantity-btn ${!qtyData.canIncrease ? 'disabled' : ''}`}
+                    onClick={() => handleQuantityChange('increase')}
+                    disabled={!qtyData.canIncrease}
+                    aria-label="Increase quantity"
+                  >
+                    +
+                  </button>
                 </div>
               </div>
 
@@ -182,22 +206,22 @@ const ProductDetail = () => {
         <div className="container">
           <div className="additional-info-grid">
             <div className="info-box">
-              <div className="info-icon">🚚</div>
+              <div className="info-icon" aria-label="Free Delivery">🚚</div>
               <h3>Free Delivery</h3>
               <p>On orders above ₹5,000</p>
             </div>
             <div className="info-box">
-              <div className="info-icon">🔒</div>
+              <div className="info-icon" aria-label="Secure Payment">🔒</div>
               <h3>Secure Payment</h3>
               <p>100% secure transactions</p>
             </div>
             <div className="info-box">
-              <div className="info-icon">📞</div>
+              <div className="info-icon" aria-label="24/7 Support">📞</div>
               <h3>24/7 Support</h3>
               <p>Expert advice anytime</p>
             </div>
             <div className="info-box">
-              <div className="info-icon">↩️</div>
+              <div className="info-icon" aria-label="Easy Returns">↩️</div>
               <h3>Easy Returns</h3>
               <p>7-day return policy</p>
             </div>
