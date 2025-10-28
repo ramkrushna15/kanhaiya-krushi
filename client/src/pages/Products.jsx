@@ -1,8 +1,9 @@
-// client/src/pages/Products.jsx - FIXED VERSION
+// client/src/pages/Products.jsx
 import SEO from '../components/SEO';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getProducts } from '../services/api';
+import { formatPrice, formatStock, formatFeatures } from '../utils/formatters';
 import './Products.css';
 
 const Products = () => {
@@ -55,12 +56,19 @@ const Products = () => {
     return (
       <div className="loading">
         <div className="spinner"></div>
+        <p>Loading products...</p>
       </div>
     );
   }
 
   return (
     <div className="products-page">
+      <SEO
+        title="Agricultural Products - Seeds, Fertilizers & More | Kanhaiya Krushi"
+        description="Browse quality agricultural products including organic seeds, fertilizers, pesticides, and farming equipment."
+        url="https://kanhaiyakrushi.com/products"
+      />
+
       {/* Page Header */}
       <section className="page-header">
         <div className="container">
@@ -68,12 +76,6 @@ const Products = () => {
           <p>Quality agricultural products for every farming need</p>
         </div>
       </section>
-
-      <SEO
-        title="Agricultural Products - Seeds, Fertilizers & More | Kanhaiya Krushi"
-        description="Browse quality agricultural products including organic seeds, fertilizers, pesticides, and farming equipment."
-        url="https://kanhaiyakrushi.com/products"
-      />
 
       {/* Products Section */}
       <section className="section">
@@ -86,11 +88,13 @@ const Products = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="search-input"
+              aria-label="Search products"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
                 className="clear-search"
+                aria-label="Clear search"
               >
                 ✕
               </button>
@@ -98,12 +102,15 @@ const Products = () => {
           </div>
 
           {/* Category Filter */}
-          <div className="category-filter">
+          <div className="category-filter" role="tablist">
             {categories.map((category) => (
               <button
                 key={category}
                 className={`filter-btn ${selectedCategory === category ? 'active' : ''}`}
                 onClick={() => setSelectedCategory(category)}
+                role="tab"
+                aria-selected={selectedCategory === category}
+                aria-label={`Filter by ${category}`}
               >
                 {category}
               </button>
@@ -119,81 +126,94 @@ const Products = () => {
           {/* Products Grid */}
           {filteredProducts.length > 0 ? (
             <div className="products-grid">
-              {filteredProducts.map((product) => (
-                <div key={product._id} className="product-card card">
-                  <div className="product-badges">
-                    {product.isOrganic && (
-                      <span className="badge badge-organic">🌿 Organic</span>
-                    )}
-                    {product.isFeatured && (
-                      <span className="badge badge-featured">⭐ Featured</span>
-                    )}
-                  </div>
+              {filteredProducts.map((product) => {
+                const formattedPrice = formatPrice(product.price, product.unit);
+                const stockInfo = formatStock(product.stock);
+                const limitedFeatures = formatFeatures(product.features, { maxFeatures: 3 });
 
-                  <Link to={`/products/${product._id}`}>
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="product-image"
-                      loading="lazy"
-                    />
-                  </Link>
-
-                  <div className="product-content">
-                    <span className="product-category">{product.category}</span>
-                    <Link to={`/products/${product._id}`} className="product-link">
-                      <h3 className="product-name">{product.name}</h3>
-                    </Link>
-
-                    <p className="product-description">
-                      {product.description.substring(0, 100)}...
-                    </p>
-
-                    {product.features && product.features.length > 0 && (
-                      <ul className="product-features">
-                        {product.features.slice(0, 3).map((feature, index) => (
-                          <li key={index}>✓ {feature}</li>
-                        ))}
-                      </ul>
-                    )}
-
-                    <div className="product-footer">
-                      <div className="product-pricing">
-                        <span className="product-price">₹{product.price}</span>
-                        <span className="product-unit">per {product.unit}</span>
-                      </div>
-
-                      <div className="product-stock">
-                        {product.stock > 0 ? (
-                          <span className="in-stock">✓ In Stock</span>
-                        ) : (
-                          <span className="out-of-stock">Out of Stock</span>
-                        )}
-                      </div>
+                return (
+                  <div key={product._id} className="product-card card">
+                    <div className="product-badges">
+                      {product.isOrganic && (
+                        <span className="badge badge-organic">🌿 Organic</span>
+                      )}
+                      {product.isFeatured && (
+                        <span className="badge badge-featured">⭐ Featured</span>
+                      )}
                     </div>
 
-                    <Link
-                      to={`/products/${product._id}`}
-                      className="btn btn-primary btn-block"
-                    >
-                      View Details
+                    <Link to={`/products/${product._id}`} aria-label={`View details for ${product.name}`}>
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="product-image"
+                        loading="lazy"
+                        onError={(e) => {
+                          e.currentTarget.src = 'https://via.placeholder.com/400x300?text=Product+Image';
+                        }}
+                      />
                     </Link>
+
+                    <div className="product-content">
+                      <span className="product-category">{product.category}</span>
+                      <Link to={`/products/${product._id}`} className="product-link">
+                        <h3 className="product-name">{product.name}</h3>
+                      </Link>
+
+                      <p className="product-description">
+                        {product.description.length > 100 
+                          ? `${product.description.substring(0, 100)}...` 
+                          : product.description
+                        }
+                      </p>
+
+                      {limitedFeatures.length > 0 && (
+                        <ul className="product-features">
+                          {limitedFeatures.map((feature, index) => (
+                            <li key={index}>{feature}</li>
+                          ))}
+                        </ul>
+                      )}
+
+                      <div className="product-footer">
+                        <div className="product-pricing">
+                          <span className="product-price">{formattedPrice}</span>
+                        </div>
+
+                        <div className="product-stock">
+                          <span className={stockInfo.className}>
+                            {stockInfo.indicator} {stockInfo.text}
+                          </span>
+                        </div>
+                      </div>
+
+                      <Link
+                        to={`/products/${product._id}`}
+                        className="btn btn-primary btn-block"
+                      >
+                        View Details
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           ) : (
             <div className="no-products">
-              <p>No products found matching your criteria.</p>
-              <button
-                onClick={() => {
-                  setSearchQuery('');
-                  setSelectedCategory('All');
-                }}
-                className="btn btn-primary"
-              >
-                Clear Filters
-              </button>
+              <div className="no-products-content">
+                <div className="no-products-icon">🔍</div>
+                <h3>No products found</h3>
+                <p>No products match your current search and filter criteria.</p>
+                <button
+                  onClick={() => {
+                    setSearchQuery('');
+                    setSelectedCategory('All');
+                  }}
+                  className="btn btn-primary"
+                >
+                  Clear All Filters
+                </button>
+              </div>
             </div>
           )}
         </div>
@@ -204,25 +224,25 @@ const Products = () => {
         <div className="container">
           <div className="info-grid">
             <div className="info-item">
-              <div className="info-icon">📦</div>
+              <div className="info-icon" aria-label="Bulk Orders">📦</div>
               <h3>Bulk Orders</h3>
               <p>Special discounts on bulk purchases</p>
             </div>
 
             <div className="info-item">
-              <div className="info-icon">🚚</div>
+              <div className="info-icon" aria-label="Free Delivery">🚚</div>
               <h3>Free Delivery</h3>
               <p>On orders above ₹5,000</p>
             </div>
 
             <div className="info-item">
-              <div className="info-icon">🔒</div>
+              <div className="info-icon" aria-label="Secure Payment">🔒</div>
               <h3>Secure Payment</h3>
               <p>100% secure transactions</p>
             </div>
 
             <div className="info-item">
-              <div className="info-icon">📞</div>
+              <div className="info-icon" aria-label="24/7 Support">📞</div>
               <h3>24/7 Support</h3>
               <p>Expert advice anytime</p>
             </div>
