@@ -1,40 +1,81 @@
-/* Marathi Typography Fix for Complex Characters */
+/* Enhanced Marathi Typography Fix for Complex Characters */
 
-/* Import additional Marathi fonts for better support */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;500;600;700;800;900&display=swap');
+/* Import the best Devanagari fonts with comprehensive character support */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Mukti:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Samarkan&display=swap');
 
-/* Global Marathi text fixes */
+/* Enhanced global Marathi text fixes */
 .marathi-text,
 [lang="mr"],
-:lang(mr) {
-  font-family: 'Noto Sans Devanagari', 'Kalam', 'Mukti', 'Eczar', system-ui, sans-serif !important;
+:lang(mr),
+body[lang="mr"],
+html[lang="mr"] * {
+  font-family: 'Noto Sans Devanagari', 'Kalam', 'Mukti', 'Samarkan', 'Mangal', 'Aparajita', 'Kokila', 'Utsaah', system-ui, sans-serif !important;
   font-feature-settings: 
     'kern' 1,           /* Enable kerning */
     'liga' 1,           /* Enable ligatures */
     'calt' 1,           /* Enable contextual alternates */
+    'clig' 1,           /* Enable contextual ligatures */
     'dlig' 1,           /* Enable discretionary ligatures */
     'ss01' 1,           /* Enable stylistic set 01 */
     'ss02' 1,           /* Enable stylistic set 02 */
-    'ss03' 1;           /* Enable stylistic set 03 */
-  font-variant-ligatures: common-ligatures contextual discretionary-ligatures;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  letter-spacing: 0.01em;
-  word-spacing: 0.05em;
-  line-height: 1.6;
+    'ss03' 1,           /* Enable stylistic set 03 */
+    'ss04' 1,           /* Enable stylistic set 04 */
+    'ss05' 1,           /* Enable stylistic set 05 */
+    'ss06' 1,           /* Enable stylistic set 06 */
+    'ss07' 1;           /* Enable stylistic set 07 */
+  font-variant-ligatures: common-ligatures contextual discretionary-ligatures historical-ligatures;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: auto;
+  letter-spacing: 0.015em;
+  word-spacing: 0.08em;
+  line-height: 1.65;
+  unicode-bidi: embed;
+  direction: ltr;
 }
 
-/* Specific fixes for problematic conjuncts */
+/* Specific fixes for extremely problematic conjuncts like महाराष्ट्र */
+.ultra-complex-conjuncts,
+.maharashtra-fix {
+  font-family: 'Noto Sans Devanagari', 'Mangal', sans-serif !important;
+  font-weight: 500 !important;
+  font-feature-settings: 
+    'kern' 1,
+    'liga' 1,
+    'calt' 1,
+    'clig' 1,
+    'dlig' 1,
+    'ss01' 1,
+    'ss02' 1,
+    'ss03' 1,
+    'ss04' 1,
+    'ss05' 1,
+    'ss06' 1,
+    'ss07' 1,
+    'ss08' 1,
+    'ss09' 1,
+    'ss10' 1;
+  text-rendering: geometricPrecision !important;
+  -webkit-font-feature-settings: 'kern', 'liga', 'calt', 'dlig', 'clig';
+  -moz-font-feature-settings: 'kern', 'liga', 'calt', 'dlig', 'clig';
+  -webkit-text-stroke: 0.01em transparent;
+  letter-spacing: 0.02em;
+  word-spacing: 0.1em;
+  font-variant-ligatures: common-ligatures contextual discretionary-ligatures historical-ligatures;
+}
+
+/* Enhanced complex conjuncts class */
 .complex-conjuncts {
-  font-family: 'Noto Sans Devanagari', sans-serif !important;
+  font-family: 'Noto Sans Devanagari', 'Mangal', sans-serif !important;
   font-weight: 400;
   font-feature-settings: 
     'kern' 1,
     'liga' 1,
     'calt' 1,
+    'clig' 1,
     'dlig' 1,
     'ss01' 1,
     'ss02' 1,
@@ -42,71 +83,90 @@
     'ss04' 1,
     'ss05' 1;
   text-rendering: geometricPrecision;
-  -webkit-text-stroke: 0.01em transparent;
-}
-
-/* Fix for specific problematic words */
-.word-fix {
-  display: inline-block;
-  font-family: 'Noto Sans Devanagari', sans-serif !important;
-  font-feature-settings: 'kern', 'liga', 'calt', 'dlig';
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-text-stroke: 0.005em transparent;
   unicode-bidi: embed;
   direction: ltr;
+  letter-spacing: 0.01em;
 }
 
-/* Headings with Marathi text */
-h1.marathi, h2.marathi, h3.marathi, h4.marathi, h5.marathi, h6.marathi {
-  font-family: 'Noto Sans Devanagari', 'Eczar', sans-serif !important;
+/* Fix for specific problematic words - add these classes in HTML */
+.word-fix {
+  display: inline-block;
+  font-family: 'Noto Sans Devanagari', 'Mangal', sans-serif !important;
+  font-feature-settings: 'kern', 'liga', 'calt', 'dlig', 'clig';
+  unicode-bidi: embed;
+  direction: ltr;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* Headings with enhanced Marathi text */
+h1.marathi, h2.marathi, h3.marathi, h4.marathi, h5.marathi, h6.marathi,
+h1[lang="mr"], h2[lang="mr"], h3[lang="mr"], h4[lang="mr"], h5[lang="mr"], h6[lang="mr"] {
+  font-family: 'Noto Sans Devanagari', 'Mangal', serif !important;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.025em;
+  word-spacing: 0.1em;
+  text-rendering: geometricPrecision;
 }
 
 /* Button text fixes */
 .btn .marathi-text,
-.btn[lang="mr"] {
-  font-family: 'Noto Sans Devanagari', sans-serif !important;
+.btn[lang="mr"],
+.btn span.marathi-text {
+  font-family: 'Noto Sans Devanagari', 'Mangal', sans-serif !important;
   font-weight: 500;
+  text-rendering: geometricPrecision;
 }
 
-/* Card content fixes */
+/* Card content enhanced fixes */
 .card .marathi-text,
 .feature-card h3,
-.service-card h3 {
-  font-family: 'Noto Sans Devanagari', 'Eczar', sans-serif !important;
-  text-rendering: optimizeLegibility;
+.service-card h3,
+.testimonial-card {
+  font-family: 'Noto Sans Devanagari', 'Mangal', sans-serif !important;
+  text-rendering: geometricPrecision;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'dlig' 1;
 }
 
-/* Navigation menu fixes */
+/* Navigation menu enhanced fixes */
 .nav-menu .marathi-text,
 .nav-link[lang="mr"] {
-  font-family: 'Noto Sans Devanagari', sans-serif !important;
+  font-family: 'Noto Sans Devanagari', 'Mangal', sans-serif !important;
   font-weight: 500;
+  text-rendering: geometricPrecision;
 }
 
-/* Testimonial fixes */
-.testimonial .marathi-text {
-  font-family: 'Noto Sans Devanagari', sans-serif !important;
+/* Testimonial enhanced fixes */
+.testimonial .marathi-text,
+.testimonial-text {
+  font-family: 'Noto Sans Devanagari', 'Mangal', sans-serif !important;
   font-style: normal;
-  line-height: 1.7;
+  line-height: 1.8;
+  text-rendering: geometricPrecision;
+  letter-spacing: 0.01em;
 }
 
-/* Footer text fixes */
+/* Footer text enhanced fixes */
 .footer .marathi-text {
-  font-family: 'Noto Sans Devanagari', sans-serif !important;
+  font-family: 'Noto Sans Devanagari', 'Mangal', sans-serif !important;
+  text-rendering: geometricPrecision;
 }
 
 /* Ensure proper rendering in all browsers */
 @supports (font-feature-settings: 'kern') {
   .marathi-enhanced {
-    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'dlig' 1;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'dlig' 1, 'clig' 1;
   }
 }
 
-/* Fallback for older browsers */
+/* Enhanced fallback for older browsers */
 @supports not (font-feature-settings: 'kern') {
   .marathi-fallback {
-    font-family: 'Noto Sans Devanagari', 'Mangal', 'Aparajita', sans-serif !important;
+    font-family: 'Noto Sans Devanagari', 'Mangal', 'Aparajita', 'Kokila', sans-serif !important;
     text-rendering: geometricPrecision;
+    -webkit-font-smoothing: subpixel-antialiased;
   }
 }
 
@@ -114,17 +174,26 @@ h1.marathi, h2.marathi, h3.marathi, h4.marathi, h5.marathi, h6.marathi {
 @media screen and (max-width: 768px) {
   .marathi-text,
   [lang="mr"] {
+    font-size: 1.05em;
+    line-height: 1.75;
+    word-spacing: 0.12em;
+    letter-spacing: 0.02em;
+  }
+  
+  .ultra-complex-conjuncts,
+  .maharashtra-fix {
     font-size: 1.1em;
-    line-height: 1.7;
-    word-spacing: 0.1em;
+    letter-spacing: 0.025em;
   }
 }
 
 /* High DPI display optimizations */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .marathi-text {
+  .marathi-text,
+  .ultra-complex-conjuncts {
     -webkit-font-smoothing: subpixel-antialiased;
-    text-rendering: optimizeLegibility;
+    text-rendering: geometricPrecision;
+    -webkit-text-stroke: 0.005em transparent;
   }
 }
 
@@ -132,7 +201,36 @@ h1.marathi, h2.marathi, h3.marathi, h4.marathi, h5.marathi, h6.marathi {
 @media print {
   .marathi-text,
   [lang="mr"] {
-    font-family: 'Noto Sans Devanagari', 'Mangal', serif !important;
+    font-family: 'Noto Sans Devanagari', 'Mangal', 'Kokila', serif !important;
     color: black !important;
+    text-rendering: geometricPrecision;
   }
+}
+
+/* Force override for problematic elements */
+.force-devanagari {
+  font-family: 'Noto Sans Devanagari' !important;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'dlig' 1, 'clig' 1 !important;
+  text-rendering: geometricPrecision !important;
+  -webkit-font-smoothing: subpixel-antialiased !important;
+}
+
+/* Specific fixes for common problematic words */
+.word-maharashtra {
+  font-family: 'Noto Sans Devanagari', 'Mangal' !important;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'dlig' 1, 'clig' 1, 'ss01' 1, 'ss02' 1 !important;
+  text-rendering: geometricPrecision !important;
+  letter-spacing: 0.02em !important;
+}
+
+.word-spardhatmak {
+  font-family: 'Noto Sans Devanagari', 'Mangal' !important;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'dlig' 1 !important;
+  text-rendering: geometricPrecision !important;
+}
+
+.word-naisargik {
+  font-family: 'Noto Sans Devanagari', 'Mangal' !important;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'dlig' 1 !important;
+  text-rendering: geometricPrecision !important;
 }
