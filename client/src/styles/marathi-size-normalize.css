@@ -1,0 +1,33 @@
+/* Normalize typography across English and Marathi */
+:root {
+  /* Keep same responsive scale for both languages */
+  --h1: clamp(28px, 6vw, 48px);
+  --h2: clamp(22px, 4.8vw, 36px);
+  --h3: clamp(18px, 3.8vw, 28px);
+  --p: clamp(14px, 3.2vw, 16px);
+}
+
+/* Force identical sizes for Marathi text by reusing the same scale */
+.marathi-text, [lang="mr"], .complex-conjuncts, .ultra-complex-conjuncts, .word-maharashtra {
+  font-size: inherit !important;     /* inherit from parent to match English */
+  line-height: inherit !important;    /* keep same rhythm */
+  letter-spacing: normal;             /* do not widen */
+  word-spacing: normal;               /* keep default */
+}
+
+/* Headings */
+h1, h2, h3 { font-weight: 700; }
+
+h1.marathi-text, h2.marathi-text, h3.marathi-text,
+[lang="mr"] h1, [lang="mr"] h2, [lang="mr"] h3 {
+  font-weight: 700;                  /* same weight as English */
+}
+
+/* Buttons, links, labels */
+.btn .marathi-text, .btn[lang="mr"], .navbar .language-toggle .lang-btn.marathi-text {
+  font-size: inherit !important;     /* match button size */
+  font-weight: 600;                  /* same as English buttons */
+}
+
+/* Prevent Marathi-specific CSS from overriding sizes */
+.marathi-fix-size-reset * { font-size: inherit !important; line-height: inherit !important; }
