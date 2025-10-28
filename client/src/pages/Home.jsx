@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getProducts, getServices } from '../services/api';
 import { useTranslation } from '../hooks/useTranslation';
+import { formatPrice } from '../utils/formatters';
 import SEO from '../components/SEO';
 import './Home.css';
 
@@ -124,22 +125,22 @@ const Home = () => {
           <h2 className={getTextClassName('section-title text-center', t('home.whyChoose.title'))}>{t('home.whyChoose.title')}</h2>
           <div className="features-grid">
             <div className="feature-card">
-              <div className="feature-icon">🌱</div>
+              <div className="feature-icon" aria-label="Quality Products">🌱</div>
               <h3 className={getTextClassName('', t('home.whyChoose.quality.title'))}>{t('home.whyChoose.quality.title')}</h3>
               <p className={getTextClassName('', t('home.whyChoose.quality.description'))}>{t('home.whyChoose.quality.description')}</p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">🌿</div>
+              <div className="feature-icon" aria-label="Organic Products">🌿</div>
               <h3 className={getTextClassName('', t('home.whyChoose.organic.title'))}>{t('home.whyChoose.organic.title')}</h3>
               <p className={getTextClassName('', t('home.whyChoose.organic.description'))}>{t('home.whyChoose.organic.description')}</p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">💰</div>
+              <div className="feature-icon" aria-label="Competitive Prices">💰</div>
               <h3 className={getTextClassName('', t('home.whyChoose.prices.title'))}>{t('home.whyChoose.prices.title')}</h3>
               <p className={getTextClassName('', t('home.whyChoose.prices.description'))}>{t('home.whyChoose.prices.description')}</p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">🚚</div>
+              <div className="feature-icon" aria-label="Fast Delivery">🚚</div>
               <h3 className={getTextClassName('', t('home.whyChoose.delivery.title'))}>{t('home.whyChoose.delivery.title')}</h3>
               <p className={getTextClassName('', t('home.whyChoose.delivery.description'))}>{t('home.whyChoose.delivery.description')}</p>
             </div>
@@ -159,37 +160,48 @@ const Home = () => {
 
           {featuredProducts.length > 0 ? (
             <div className="products-grid">
-              {featuredProducts.map((product) => (
-                <div key={product._id} className="product-card card">
-                  <div className="product-badge">
-                    {product.isOrganic && <span className={getTextClassName('badge-organic', t('home.featuredProducts.organic'))}>🌿 {t('home.featuredProducts.organic')}</span>}
-                  </div>
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="product-image"
-                    loading="lazy"
-                    onError={(e) => {
-                      e.target.src = 'https://via.placeholder.com/400x300?text=Product+Image';
-                    }}
-                  />
-                  <div className="product-info">
-                    <h3 className={getTextClassName('product-name', product.name)}>{product.name}</h3>
-                    <p className={getTextClassName('product-description', product.description)}>
-                      {product.description.substring(0, 100)}...
-                    </p>
-                    <div className="product-footer">
-                      <span className={getTextClassName('product-price')}>₹{product.price}/{product.unit}</span>
-                      <Link to={`/products/${product._id}`} className="btn-link">
-                        <span className={getTextClassName('', t('home.featuredProducts.viewDetails'))}>{t('home.featuredProducts.viewDetails')}</span>
-                      </Link>
+              {featuredProducts.map((product) => {
+                const formattedPrice = formatPrice(product.price, product.unit);
+                
+                return (
+                  <div key={product._id} className="product-card card">
+                    <div className="product-badge">
+                      {product.isOrganic && <span className={getTextClassName('badge-organic', t('home.featuredProducts.organic'))}>🌿 {t('home.featuredProducts.organic')}</span>}
+                    </div>
+                    <Link to={`/products/${product._id}`} aria-label={`View details for ${product.name}`}>
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="product-image"
+                        loading="lazy"
+                        onError={(e) => {
+                          e.target.src = 'https://via.placeholder.com/400x300?text=Product+Image';
+                        }}
+                      />
+                    </Link>
+                    <div className="product-info">
+                      <h3 className={getTextClassName('product-name', product.name)}>{product.name}</h3>
+                      <p className={getTextClassName('product-description', product.description)}>
+                        {product.description.length > 100 
+                          ? `${product.description.substring(0, 100)}...` 
+                          : product.description
+                        }
+                      </p>
+                      <div className="product-footer">
+                        <span className={getTextClassName('product-price')}>{formattedPrice}</span>
+                        <Link to={`/products/${product._id}`} className="btn-link">
+                          <span className={getTextClassName('', t('home.featuredProducts.viewDetails'))}>{t('home.featuredProducts.viewDetails')}</span>
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           ) : (
-            <p className={getTextClassName('no-data')}>No featured products available at the moment.</p>
+            <div className="no-data">
+              <p className={getTextClassName('no-data')}>No featured products available at the moment.</p>
+            </div>
           )}
         </div>
       </section>
@@ -206,22 +218,26 @@ const Home = () => {
 
           {services.length > 0 ? (
             <div className="services-grid">
-              {services.map((service) => (
-                <div key={service._id} className="service-card card">
-                  <div className="service-icon-large">{service.icon}</div>
-                  <h3 className={getTextClassName('service-title', service.title)}>{service.title}</h3>
-                  <p className={getTextClassName('service-description', service.description)}>{service.description}</p>
-                  <div className="service-meta">
-                    <span className={getTextClassName('service-duration')}>⏱️ {service.duration || t('home.services.onRequest')}</span>
-                    {service.price && <span className={getTextClassName('service-price')}>₹{service.price}</span>}
+              {services.map((service) => {
+                const servicePrice = service.price ? formatPrice(service.price, null, { showUnit: false }) : null;
+                
+                return (
+                  <div key={service._id} className="service-card card">
+                    <div className="service-icon-large" aria-label={service.title}>{service.icon}</div>
+                    <h3 className={getTextClassName('service-title', service.title)}>{service.title}</h3>
+                    <p className={getTextClassName('service-description', service.description)}>{service.description}</p>
+                    <div className="service-meta">
+                      <span className={getTextClassName('service-duration')}>⏱️ {service.duration || t('home.services.onRequest')}</span>
+                      {servicePrice && <span className={getTextClassName('service-price')}>{servicePrice}</span>}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           ) : (
             <div className="services-grid">
               <div className="service-card card">
-                <div className="service-icon-large">🎓</div>
+                <div className="service-icon-large" aria-label="Farming Workshops">🎓</div>
                 <h3 className={getTextClassName('service-title')}>Farming Workshops</h3>
                 <p className={getTextClassName('service-description', t('home.services.workshops'))}>{t('home.services.workshops')}</p>
                 <div className="service-meta">
@@ -229,7 +245,7 @@ const Home = () => {
                 </div>
               </div>
               <div className="service-card card">
-                <div className="service-icon-large">🌤️</div>
+                <div className="service-icon-large" aria-label="Weather Advisory">🌤️</div>
                 <h3 className={getTextClassName('service-title')}>Weather Advisory</h3>
                 <p className={getTextClassName('service-description', t('home.services.weather'))}>{t('home.services.weather')}</p>
                 <div className="service-meta">
@@ -237,7 +253,7 @@ const Home = () => {
                 </div>
               </div>
               <div className="service-card card">
-                <div className="service-icon-large">🔬</div>
+                <div className="service-icon-large" aria-label="Crop Diagnosis">🔬</div>
                 <h3 className={getTextClassName('service-title')}>Crop Diagnosis</h3>
                 <p className={getTextClassName('service-description', t('home.services.diagnosis'))}>{t('home.services.diagnosis')}</p>
                 <div className="service-meta">
@@ -255,7 +271,7 @@ const Home = () => {
           <h2 className={getTextClassName('section-title text-center', t('home.testimonials.title'))}>{t('home.testimonials.title')}</h2>
           <div className="testimonials-grid">
             <div className="testimonial-card">
-              <div className="testimonial-rating">⭐⭐⭐⭐⭐</div>
+              <div className="testimonial-rating" aria-label="5 star rating">⭐⭐⭐⭐⭐</div>
               <p className={getTextClassName('testimonial-text', 'कन्हैया कृषी केंद्रातील जैविक बियाणे वापरल्यानंतर माझ्या पिकाचे उत्पादन खूप वाढले आहे. खरंच उत्तम गुणवत्ता!')}>
                 "कन्हैया कृषी केंद्रातील जैविक बियाणे वापरल्यानंतर माझ्या पिकाचे उत्पादन खूप वाढले आहे. खरंच उत्तम गुणवत्ता!"
               </p>
@@ -265,7 +281,7 @@ const Home = () => {
               </div>
             </div>
             <div className="testimonial-card">
-              <div className="testimonial-rating">⭐⭐⭐⭐⭐</div>
+              <div className="testimonial-rating" aria-label="5 star rating">⭐⭐⭐⭐⭐</div>
               <p className={getTextClassName('testimonial-text')}>
                 "येथील खते आणि कीटकनाशके खूप चांगल्या दर्जाची आहेत. त्यांची मातीची तपासणी सेवा अतिशय उपयुक्त आहे."
               </p>
@@ -275,7 +291,7 @@ const Home = () => {
               </div>
             </div>
             <div className="testimonial-card">
-              <div className="testimonial-rating">⭐⭐⭐⭐⭐</div>
+              <div className="testimonial-rating" aria-label="5 star rating">⭐⭐⭐⭐⭐</div>
               <p className={getTextClassName('testimonial-text')}>
                 "वेळेवर डिलिव्हरी आणि खूप चांगली सेवा. शेतकऱ्यांची खरी काळजी घेतात ते येथे."
               </p>
@@ -285,7 +301,7 @@ const Home = () => {
               </div>
             </div>
             <div className="testimonial-card">
-              <div className="testimonial-rating">⭐⭐⭐⭐⭐</div>
+              <div className="testimonial-rating" aria-label="5 star rating">⭐⭐⭐⭐⭐</div>
               <p className={getTextClassName('testimonial-text')}>
                 "Best quality fertilizers at reasonable prices. Their soil testing service is excellent."
               </p>
