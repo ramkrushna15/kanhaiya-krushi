@@ -23,13 +23,36 @@ export const LanguageProvider = ({ children }) => {
     setIsLoaded(true);
   }, []);
 
+  // Apply language-specific styling and attributes
+  useEffect(() => {
+    if (isLoaded) {
+      const htmlElement = document.documentElement;
+      const bodyElement = document.body;
+      
+      // Set document language attribute for SEO and accessibility
+      htmlElement.lang = language === 'mr' ? 'mr-IN' : 'en-IN';
+      
+      // Apply language-specific CSS classes
+      bodyElement.classList.remove('language-en', 'language-mr');
+      bodyElement.classList.add(`language-${language}`);
+      
+      // Set dir attribute (both are LTR)
+      htmlElement.dir = 'ltr';
+      
+      // Add/remove Marathi font class for better typography
+      if (language === 'mr') {
+        bodyElement.classList.add('marathi-text');
+      } else {
+        bodyElement.classList.remove('marathi-text');
+      }
+    }
+  }, [language, isLoaded]);
+
   // Save language preference to localStorage
   const changeLanguage = (newLanguage) => {
     if (['en', 'mr'].includes(newLanguage)) {
       setLanguage(newLanguage);
       localStorage.setItem('kanhaiya-krushi-language', newLanguage);
-      // Update document lang attribute for SEO
-      document.documentElement.lang = newLanguage === 'mr' ? 'mr-IN' : 'en-IN';
     }
   };
 
