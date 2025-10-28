@@ -71,6 +71,59 @@ export const translations = {
         getStarted: 'Start Your Journey Today'
       }
     },
+
+    // About Page
+    about: {
+      title: 'About Kanhaiya Krushi Service Center',
+      subtitle: 'Your Trusted Partner in Modern Sustainable Agriculture',
+      pageSubtitle: 'Growing together towards a sustainable agricultural future',
+      
+      // Company Story
+      story: {
+        title: 'Our Agricultural Journey',
+        paragraph1: 'Established with a dedicated mission to provide progressive farmers with premium quality agricultural inputs, modern farming equipment and comprehensive technical guidance. Over the past decade, we have evolved into Maharashtra\'s most trusted agricultural service center, serving thousands of farming families across 15+ districts.',
+        paragraph2: 'We are committed to sustainable farming practices that not only maximize crop yields and farmer income but also preserve soil health and environmental balance for future generations. Our team of qualified agricultural scientists and field experts continuously research and source the finest products while developing innovative farming solutions tailored to Maharashtra\'s diverse agro-climatic conditions.'
+      },
+      
+      // Mission & Vision
+      mission: {
+        title: 'Our Mission',
+        description: 'To empower progressive farmers with scientifically proven agricultural inputs, cutting-edge farming technologies, and expert technical guidance that ensures sustainable, profitable and environmentally responsible farming practices across Maharashtra.'
+      },
+      vision: {
+        title: 'Our Vision',
+        description: 'To emerge as Maharashtra\'s leading agricultural transformation partner, pioneering sustainable farming revolution and contributing significantly to the state\'s food security, farmer prosperity and agricultural sustainability goals.'
+      },
+      
+      // Core Values
+      values: {
+        title: 'Our Agricultural Values',
+        sustainability: {
+          title: 'Sustainable Agriculture',
+          description: 'Promoting eco-friendly and soil-conserving farming practices'
+        },
+        quality: {
+          title: 'Premium Quality Assurance',
+          description: 'Never compromising on agricultural input standards and authenticity'
+        },
+        trust: {
+          title: 'Farmer Partnership',
+          description: 'Building long-term relationships based on mutual trust and success'
+        },
+        innovation: {
+          title: 'Agricultural Innovation',
+          description: 'Embracing modern agricultural technologies and scientific methods'
+        }
+      },
+      
+      // Statistics
+      stats: {
+        farmers: 'Progressive Farmers',
+        products: 'Quality Products',
+        experience: 'Years Agricultural Experience',
+        districts: 'Districts Served'
+      }
+    },
     
     // Footer
     footer: {
@@ -94,12 +147,6 @@ export const translations = {
         equipment: 'Farm Equipment',
         organic: 'Organic Products'
       }
-    },
-    
-    // About Page
-    about: {
-      title: 'About Kanhaiya Krushi Service Center',
-      subtitle: 'Your Trusted Partner in Modern Sustainable Agriculture'
     },
     
     // Products Page
@@ -199,6 +246,59 @@ export const translations = {
         getStarted: 'आजच आपला प्रवास सुरू करा'
       }
     },
+
+    // About Page
+    about: {
+      title: 'कन्हैया कृषी सेवा केंद्राबद्दल',
+      subtitle: 'आधुनिक शाश्वत शेतीमध्ये आपला विश्वसनीय भागीदार',
+      pageSubtitle: 'शाश्वत कृषी भविष्याच्या दिशेने एकत्र वाढत आहोत',
+      
+      // Company Story
+      story: {
+        title: 'आमचा कृषी प्रवास',
+        paragraph1: 'प्रगतीशील शेतकऱ्यांना उत्कृष्ट गुणवत्तेची कृषी निविष्ठा, आधुनिक शेती उपकरणे आणि सर्वसमावेशक तांत्रिक मार्गदर्शन प्रदान करण्याच्या समर्पित उद्दिष्टाने स्थापना. गेल्या दशकात आम्ही महाराष्ट्रातील सर्वात विश्वसनीय कृषी सेवा केंद्र म्हणून विकसित झालो आहोत, १५+ जिल्ह्यांमधील हजारो शेतकरी कुटुंबांना सेवा देत आहोत.',
+        paragraph2: 'आम्ही शाश्वत शेती पद्धतींसाठी वचनबद्ध आहोत ज्या केवळ पीक उत्पादन आणि शेतकरी उत्पन्न वाढवीत नाहीत तर भावी पिढ्यांसाठी मातीची आरोग्य आणि पर्यावरणीय संतुलन जपतात. आमची पात्र कृषी शास्त्रज्ञ आणि क्षेत्रीय तज्ज्ञांची टीम सतत संशोधन करते आणि महाराष्ट्राच्या विविध कृषी-हवामान परिस्थितींसाठी तयार केलेल्या नाविन्यपूर्ण शेती समाधानांचा विकास करताना उत्कृष्ट उत्पादनांचा स्रोत करते.'
+      },
+      
+      // Mission & Vision
+      mission: {
+        title: 'आमचे ध्येय',
+        description: 'प्रगतीशील शेतकऱ्यांना वैज्ञानिकदृष्ट्या सिद्ध कृषी निविष्ठा, अत्याधुनिक शेती तंत्रज्ञान आणि तज्ज्ञ तांत्रिक मार्गदर्शन प्रदान करणे जे संपूर्ण महाराष्ट्रात शाश्वत, फायदेशीर आणि पर्यावरणीयदृष्ट्या जबाबदार शेती पद्धती सुनिश्चित करते.'
+      },
+      vision: {
+        title: 'आमची दृष्टी',
+        description: 'महाराष्ट्राचे अग्रगण्य कृषी परिवर्तन भागीदार म्हणून उदयास येणे, शाश्वत शेती क्रांतीचे नेतृत्व करणे आणि राज्याच्या अन्न सुरक्षा, शेतकरी समृद्धी आणि कृषी टिकाऊपणा उद्दिष्टांमध्ये महत्त्वपूर्ण योगदान देणे.'
+      },
+      
+      // Core Values
+      values: {
+        title: 'आमची कृषी मूल्ये',
+        sustainability: {
+          title: 'शाश्वत शेती',
+          description: 'पर्यावरणास अनुकूल आणि मृदा संधारण शेती पद्धतींचा प्रचार'
+        },
+        quality: {
+          title: 'उत्कृष्ट गुणवत्ता हमी',
+          description: 'कृषी निविष्ठा मानके आणि प्रामाणिकतेवर कधीही तडजोड न करणे'
+        },
+        trust: {
+          title: 'शेतकरी भागीदारी',
+          description: 'परस्पर विश्वास आणि यशावर आधारित दीर्घकालीन नातेसंबंध निर्माण करणे'
+        },
+        innovation: {
+          title: 'कृषी नवाचार',
+          description: 'आधुनिक कृषी तंत्रज्ञान आणि वैज्ञानिक पद्धतींचा स्वीकार'
+        }
+      },
+      
+      // Statistics
+      stats: {
+        farmers: 'प्रगतीशील शेतकरी',
+        products: 'गुणवत्तापूर्ण उत्पादने',
+        experience: 'वर्षांचा कृषी अनुभव',
+        districts: 'जिल्ह्यांमध्ये सेवा'
+      }
+    },
     
     // Footer
     footer: {
@@ -224,12 +324,6 @@ export const translations = {
       }
     },
     
-    // About Page
-    about: {
-      title: 'कन्हैया कृषी सेवा केंद्राबद्दल',
-      subtitle: 'आधुनिक शाश्वत शेतीमध्ये आपला विश्वसनीय भागीदार'
-    },
-    
     // Products Page
     products: {
       title: 'कृषी उत्पादने आणि शेती साहित्य',
@@ -238,14 +332,14 @@ export const translations = {
     
     // Services Page
     services: {
-      title: 'कृषी सहायता सेवा',
-      subtitle: 'सर्वसमावेशक शेती सहायता आणि तांत्रिक मार्गदर्शन'
+      title: 'कृषी सहाय्यता सेवा',
+      subtitle: 'सर्वसमावेशक शेती सहाय्यता आणि तांत्रिक मार्गदर्शन'
     },
     
     // Contact Page
     contact: {
       title: 'संपर्क करा',
-      subtitle: 'तज्ज्ञ कृषी मार्गदर्शन आणि सहायता मिळवा'
+      subtitle: 'तज्ज्ञ कृषी मार्गदर्शन आणि सहाय्यता मिळवा'
     },
     
     // Common
