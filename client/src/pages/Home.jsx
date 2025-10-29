@@ -37,19 +37,27 @@ const Home = () => {
     }
   };
 
-  // Helper function to add appropriate Marathi CSS class based on text complexity
+  // Enhanced helper function to add appropriate Marathi CSS class based on text complexity
   const getTextClassName = (additionalClasses = '', text = '') => {
     if (language !== 'mr') return additionalClasses;
     
     let baseClass = 'marathi-text';
     
-    // Check for ultra-complex conjuncts like महाराष्ट्र
-    if (text && (text.includes('महाराष्ट्र') || text.includes('राष्ट्र'))) {
-      baseClass = 'ultra-complex-conjuncts maharashtra-fix';
+    // Check for ultra-complex conjuncts like महाराष्ट्र, तज्ज्ञांचे, स्पर्धात्मक
+    if (text && (
+      text.includes('महाराष्ट्र') || text.includes('राष्ट्र') ||
+      text.includes('तज्ज्ञांचे') || text.includes('ज्ञा') ||
+      text.includes('स्पर्धात्मक') || text.includes('र्धा')
+    )) {
+      baseClass = 'ultra-complex-conjuncts maharashtra-fix complex-conjuncts-critical';
     }
-    // Check for other complex conjuncts like स्पर्धात्मक, नैसर्गिक
-    else if (text && (text.includes('स्पर्धात्मक') || text.includes('नैसर्गिक'))) {
-      baseClass = 'complex-conjuncts';
+    // Check for other complex conjuncts
+    else if (text && (
+      text.includes('नैसर्गिक') || text.includes('गुणवत्ता') ||
+      text.includes('वितरण') || text.includes('सेवा') ||
+      text.includes('केंद्रा') || text.includes('शेतकरी')
+    )) {
+      baseClass = 'complex-conjuncts conjunct-fix';
     }
     
     return `${baseClass} ${additionalClasses}`.trim();
@@ -62,6 +70,18 @@ const Home = () => {
       text,
       className: getTextClassName(additionalClasses, text)
     };
+  };
+
+  // Helper to wrap problematic words with specific classes
+  const wrapComplexWords = (text) => {
+    if (language !== 'mr') return text;
+    
+    return text
+      .replace(/महाराष्ट्र/g, '<span class="word-maharashtra force-conjunct-fix">महाराष्ट्र</span>')
+      .replace(/तज्ज्ञांचे/g, '<span class="ultra-complex-conjuncts">तज्ज्ञांचे</span>')
+      .replace(/स्पर्धात्मक/g, '<span class="complex-conjuncts-critical">स्पर्धात्मक</span>')
+      .replace(/नैसर्गिक/g, '<span class="conjunct-fix">नैसर्गिक</span>')
+      .replace /गुणवत्ता/g, '<span class="conjunct-fix">गुणवत्ता</span>');
   };
 
   if (error) {
@@ -265,49 +285,49 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Enhanced Testimonials Section with Better Conjunct Handling */}
       <section className="section bg-cream testimonials-section">
         <div className="container">
-          <h2 className={getTextClassName('section-title text-center', t('home.testimonials.title'))}>{t('home.testimonials.title')}</h2>
+          <h2 className={getTextClassName('section-title text-center heading-marathi', t('home.testimonials.title'))}>{t('home.testimonials.title')}</h2>
           <div className="testimonials-grid">
             <div className="testimonial-card">
               <div className="testimonial-rating" aria-label="5 star rating">⭐⭐⭐⭐⭐</div>
-              <p className={getTextClassName('testimonial-text', 'कन्हैया कृषी केंद्रातील जैविक बियाणे वापरल्यानंतर माझ्या पिकाचे उत्पादन खूप वाढले आहे. खरंच उत्तम गुणवत्ता!')}>
-                "कन्हैया कृषी केंद्रातील जैविक बियाणे वापरल्यानंतर माझ्या पिकाचे उत्पादन खूप वाढले आहे. खरंच उत्तम गुणवत्ता!"
+              <p className="testimonial-text ultra-complex-conjuncts complex-conjuncts-critical">
+                "कन्हैया कृषी केंद्रातील जैविक बियाणे वापरल्यानंतर माझ्या पिकाचे उत्पादन खूप वाढले आहे. खरंच उत्तम <span className="conjunct-fix">गुणवत्ता</span>!"
               </p>
               <div className="testimonial-author">
-                <strong className={getTextClassName('', 'ज्योतिराम जाधव')}>ज्योतिराम जाधव</strong>
-                <span className={getTextClassName('', 'शेतकरी - करमाळा, महाराष्ट्र')}>शेतकरी - करमाळा, <span className="word-maharashtra">महाराष्ट्र</span></span>
+                <strong className="ultra-complex-conjuncts">ज्योतिराम जाधव</strong>
+                <span className="complex-conjuncts-critical">शेतकरी - करमाळा, <span className="word-maharashtra force-conjunct-fix">महाराष्ट्र</span></span>
               </div>
             </div>
             <div className="testimonial-card">
               <div className="testimonial-rating" aria-label="5 star rating">⭐⭐⭐⭐⭐</div>
-              <p className={getTextClassName('testimonial-text')}>
-                "येथील खते आणि कीटकनाशके खूप चांगल्या दर्जाची आहेत. त्यांची मातीची तपासणी सेवा अतिशय उपयुक्त आहे."
+              <p className="testimonial-text ultra-complex-conjuncts">
+                "येथील खते आणि कीटकनाशके खूप चांगल्या दर्जाची आहेत. त्यांची मातीची तपासणी <span className="conjunct-fix">सेवा</span> अतिशय उपयुक्त आहे."
               </p>
               <div className="testimonial-author">
-                <strong className={getTextClassName()}>नागनाथ नाईकनवरे</strong>
-                <span className={getTextClassName('', 'शेतकरी - माढा, महाराष्ट्र')}>शेतकरी - माढा, <span className="word-maharashtra">महाराष्ट्र</span></span>
+                <strong className="ultra-complex-conjuncts">नागनाथ नाईकनवरे</strong>
+                <span className="complex-conjuncts-critical">शेतकरी - माढा, <span className="word-maharashtra force-conjunct-fix">महाराष्ट्र</span></span>
               </div>
             </div>
             <div className="testimonial-card">
               <div className="testimonial-rating" aria-label="5 star rating">⭐⭐⭐⭐⭐</div>
-              <p className={getTextClassName('testimonial-text')}>
-                "वेळेवर डिलिव्हरी आणि खूप चांगली सेवा. शेतकऱ्यांची खरी काळजी घेतात ते येथे."
+              <p className="testimonial-text ultra-complex-conjuncts">
+                "वेळेवर डिलिव्हरी आणि खूप चांगली <span className="conjunct-fix">सेवा</span>. <span className="complex-conjuncts-critical">शेतकऱ्यांची</span> खरी काळजी घेतात ते येथे."
               </p>
               <div className="testimonial-author">
-                <strong className={getTextClassName()}>गणेश पोळ</strong>
-                <span className={getTextClassName('', 'शेतकरी, महाराष्ट्र')}>शेतकरी, <span className="word-maharashtra">महाराष्ट्र</span></span>
+                <strong className="ultra-complex-conjuncts">गणेश पोळ</strong>
+                <span className="complex-conjuncts-critical">शेतकरी, <span className="word-maharashtra force-conjunct-fix">महाराष्ट्र</span></span>
               </div>
             </div>
             <div className="testimonial-card">
               <div className="testimonial-rating" aria-label="5 star rating">⭐⭐⭐⭐⭐</div>
-              <p className={getTextClassName('testimonial-text')}>
+              <p className="testimonial-text">
                 "Best quality fertilizers at reasonable prices. Their soil testing service is excellent."
               </p>
               <div className="testimonial-author">
-                <strong className={getTextClassName()}>Priya Sharma</strong>
-                <span className={getTextClassName()}>Agricultural Expert, Maharashtra</span>
+                <strong>Priya Sharma</strong>
+                <span>Agricultural Expert, Maharashtra</span>
               </div>
             </div>
           </div>
@@ -317,12 +337,12 @@ const Home = () => {
       {/* CTA Section */}
       <section className="section cta-section">
         <div className="container text-center">
-          <h2 className={getTextClassName('cta-title', t('home.testimonials.readyToGrow'))}>{t('home.testimonials.readyToGrow')}</h2>
+          <h2 className={getTextClassName('cta-title heading-marathi', t('home.testimonials.readyToGrow'))}>{t('home.testimonials.readyToGrow')}</h2>
           <p className={getTextClassName('cta-text', t('home.testimonials.joinFarmers'))}>
             {t('home.testimonials.joinFarmers')}
           </p>
           <Link to="/contact" className="btn btn-primary btn-large">
-            <span className={getTextClassName('', t('home.testimonials.getStarted'))}>{t('home.testimonials.getStarted')}</span>
+            <span className={getTextClassName('btn-marathi', t('home.testimonials.getStarted'))}>{t('home.testimonials.getStarted')}</span>
           </Link>
         </div>
       </section>
