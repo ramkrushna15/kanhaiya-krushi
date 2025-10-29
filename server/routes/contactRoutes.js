@@ -4,7 +4,7 @@ const { Contact } = require('../models/Service');
 const nodemailer = require('nodemailer');
 
 // Email configuration
-const transporter = nodemailer.createTransport({
+const transporter = nodemailer.createTransporter({
   service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
@@ -19,8 +19,9 @@ router.post('/', async (req, res) => {
     
     // Send email notification
     const mailOptions = {
-      from: process.env.EMAIL_USER,
+      from: `"Kanhaiya Krushi Contact Form" <${process.env.EMAIL_USER}>`,
       to: 'info@kanhaiyakrushi.com',
+      replyTo: req.body.email, // Allow replying directly to the customer
       subject: 'New Contact Form Submission - Kanhaiya Krushi',
       html: `
         <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f5f5f5;">
@@ -57,7 +58,8 @@ router.post('/', async (req, res) => {
             
             <hr style="border: 1px solid #e0e0e0; margin: 20px 0;">
             <p style="color: #666; font-size: 12px; text-align: center; margin: 0;">
-              Received on: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
+              Received on: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}<br>
+              From: kanhaiyakrushi.com contact form
             </p>
           </div>
         </div>
