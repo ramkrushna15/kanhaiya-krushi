@@ -165,7 +165,66 @@ export const translations = {
     // Contact Page
     contact: {
       title: 'Contact Us',
-      subtitle: 'Get Expert Agricultural Guidance and Support'
+      subtitle: 'We would love to hear from you',
+      pageTitle: 'Contact Us',
+      pageDescription: 'Get expert agricultural guidance and support from Kanhaiya Krushi. Located at Jeur, Karmala, Solapur, Maharashtra.',
+      
+      // Contact Form
+      form: {
+        title: 'Send Us a Message',
+        name: 'Full Name',
+        email: 'Email Address',
+        phone: 'Phone Number',
+        subject: 'Subject',
+        message: 'Message',
+        phonePlaceholder: '+91 XXXXX XXXXX',
+        send: 'Send Message',
+        sending: 'Sending...',
+        required: '*',
+        characterCount: '{{count}}/1000',
+        success: 'Thank you! Your message has been sent successfully.',
+        error: 'Something went wrong. Please try again.',
+        fixErrors: 'Please fix the errors above'
+      },
+      
+      // Validation Messages
+      validation: {
+        nameRequired: 'Name must be at least 2 characters',
+        emailInvalid: 'Please enter a valid email',
+        phoneInvalid: 'Please enter a valid phone number',
+        subjectRequired: 'Subject must be at least 3 characters',
+        messageRequired: 'Message must be at least 10 characters',
+        messageTooLong: 'Message must be less than 1000 characters'
+      },
+      
+      // Contact Information
+      info: {
+        title: 'Get In Touch',
+        address: 'Address',
+        addressText: 'Near Market Yard, Jeur, Karmala\nSolapur, Maharashtra, India',
+        viewOnMaps: '📍 View on Google Maps',
+        phone: 'Phone',
+        email: 'Email',
+        businessHours: 'Business Hours',
+        mondayToSaturday: 'Monday - Saturday:',
+        sunday: 'Sunday:',
+        morningToEvening: '9:00 AM - 8:00 PM',
+        morningToAfternoon: '9:00 AM - 5:00 PM'
+      },
+      
+      // Social Media
+      social: {
+        title: 'Follow Us',
+        whatsapp: 'Contact us on WhatsApp',
+        email: 'Send us an email',
+        comingSoon: 'More social media links coming soon!'
+      },
+      
+      // Map Section
+      map: {
+        title: 'Find Us Here',
+        openInMaps: '🗺️ Open in Google Maps'
+      }
     },
     
     // Common
@@ -339,8 +398,67 @@ export const translations = {
     
     // Contact Page
     contact: {
-      title: 'संपर्क करा',
-      subtitle: 'तज्ञ कृषी मार्गदर्शन आणि सहाय्यता मिळवा'
+      title: 'संपर्क साधा',
+      subtitle: 'आम्हाला तुमच्याशी बोलायला आवडेल',
+      pageTitle: 'संपर्क साधा',
+      pageDescription: 'कन्हैया कृषीकडून तज्ञ कृषी मार्गदर्शन आणि सहाय्यता मिळवा. जेऊर, करमाळा, सोलापूर, महाराष्ट्र येथे स्थित.',
+      
+      // Contact Form
+      form: {
+        title: 'आम्हाला संदेश पाठवा',
+        name: 'पूर्ण नाव',
+        email: 'ईमेल पत्ता',
+        phone: 'फोन नंबर',
+        subject: 'विषय',
+        message: 'संदेश',
+        phonePlaceholder: '+91 XXXXX XXXXX',
+        send: 'संदेश पाठवा',
+        sending: 'पाठवत आहे...',
+        required: '*',
+        characterCount: '{{count}}/1000',
+        success: 'धन्यवाद! तुमचा संदेश यशस्वीपणे पाठविला गेला आहे.',
+        error: 'काहीतरी चूक झाली. कृपया पुन्हा प्रयत्न करा.',
+        fixErrors: 'कृपया वरील चुका दुरुस्त करा'
+      },
+      
+      // Validation Messages
+      validation: {
+        nameRequired: 'नाव किमान 2 अक्षरांचे असावे',
+        emailInvalid: 'कृपया वैध ईमेल टाका',
+        phoneInvalid: 'कृपया वैध फोन नंबर टाका',
+        subjectRequired: 'विषय किमान 3 अक्षरांचा असावा',
+        messageRequired: 'संदेश किमान 10 अक्षरांचा असावा',
+        messageTooLong: 'संदेश 1000 अक्षरांपेक्षा कमी असावा'
+      },
+      
+      // Contact Information
+      info: {
+        title: 'संपर्कात रहा',
+        address: 'पत्ता',
+        addressText: 'मार्केट यार्ड जवळ, जेऊर, करमाळा\nसोलापूर, महाराष्ट्र, भारत',
+        viewOnMaps: '📍 Google Maps वर पहा',
+        phone: 'फोन',
+        email: 'ईमेल',
+        businessHours: 'व्यवसाय वेळा',
+        mondayToSaturday: 'सोमवार - शनिवार:',
+        sunday: 'रविवार:',
+        morningToEvening: 'सकाळी ९:०० - संध्याकाळी ८:००',
+        morningToAfternoon: 'सकाळी ९:०० - संध्याकाळी ५:००'
+      },
+      
+      // Social Media
+      social: {
+        title: 'आमचे अनुसरण करा',
+        whatsapp: 'WhatsApp वर संपर्क साधा',
+        email: 'आम्हाला ईमेल पाठवा',
+        comingSoon: 'लवकरच अधिक सोशल मीडिया दुवे येत आहेत!'
+      },
+      
+      // Map Section
+      map: {
+        title: 'आम्हाला येथे शोधा',
+        openInMaps: '🗺️ Google Maps मध्ये उघडा'
+      }
     },
     
     // Common
