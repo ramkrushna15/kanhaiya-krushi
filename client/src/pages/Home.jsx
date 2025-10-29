@@ -24,64 +24,52 @@ const Home = () => {
 
       const [productsRes, servicesRes] = await Promise.all([
         getProducts({ featured: true }),
-        getServices()
+        getServices(),
       ]);
 
       setFeaturedProducts(productsRes.data.data.slice(0, 3));
       setServices(servicesRes.data.data.slice(0, 3));
     } catch (error) {
       console.error('Error fetching data:', error);
-      setError(isLoaded ? t('common.error') : 'Unable to load content. Please check your connection and try again.');
+      setError(
+        isLoaded
+          ? t('common.error')
+          : 'Unable to load content. Please check your connection and try again.'
+      );
     } finally {
       setLoading(false);
     }
   };
 
-  // Enhanced helper function to add appropriate Marathi CSS class based on text complexity
   const getTextClassName = (additionalClasses = '', text = '') => {
     if (language !== 'mr') return additionalClasses;
-    
+
     let baseClass = 'marathi-text';
-    
-    // Check for ultra-complex conjuncts like महाराष्ट्र, तज्ज्ञांचे, स्पर्धात्मक
-    if (text && (
-      text.includes('महाराष्ट्र') || text.includes('राष्ट्र') ||
-      text.includes('तज्ज्ञांचे') || text.includes('ज्ञा') ||
-      text.includes('स्पर्धात्मक') || text.includes('र्धा')
-    )) {
-      baseClass = 'ultra-complex-conjuncts maharashtra-fix complex-conjuncts-critical';
-    }
-    // Check for other complex conjuncts
-    else if (text && (
-      text.includes('नैसर्गिक') || text.includes('गुणवत्ता') ||
-      text.includes('वितरण') || text.includes('सेवा') ||
-      text.includes('केंद्रा') || text.includes('शेतकरी')
-    )) {
+
+    if (
+      text &&
+      (text.includes('महाराष्ट्र') ||
+        text.includes('राष्ट्र') ||
+        text.includes('तज्ज्ञांचे') ||
+        text.includes('ज्ञा') ||
+        text.includes('स्पर्धात्मक') ||
+        text.includes('र्धा'))
+    ) {
+      baseClass =
+        'ultra-complex-conjuncts maharashtra-fix complex-conjuncts-critical';
+    } else if (
+      text &&
+      (text.includes('नैसर्गिक') ||
+        text.includes('गुणवत्ता') ||
+        text.includes('वितरण') ||
+        text.includes('सेवा') ||
+        text.includes('केंद्रा') ||
+        text.includes('शेतकरी'))
+    ) {
       baseClass = 'complex-conjuncts conjunct-fix';
     }
-    
+
     return `${baseClass} ${additionalClasses}`.trim();
-  };
-
-  // Helper to get text with proper class
-  const getMarathiText = (textKey, additionalClasses = '') => {
-    const text = t(textKey);
-    return {
-      text,
-      className: getTextClassName(additionalClasses, text)
-    };
-  };
-
-  // Helper to wrap problematic words with specific classes
-  const wrapComplexWords = (text) => {
-    if (language !== 'mr') return text;
-    
-    return text
-      .replace(/महाराष्ट्र/g, '<span class="word-maharashtra force-conjunct-fix">महाराष्ट्र</span>')
-      .replace(/तज्ज्ञांचे/g, '<span class="ultra-complex-conjuncts">तज्ज्ञांचे</span>')
-      .replace(/स्पर्धात्मक/g, '<span class="complex-conjuncts-critical">स्पर्धात्मक</span>')
-      .replace(/नैसर्गिक/g, '<span class="conjunct-fix">नैसर्गिक</span>')
-      .replace(/गुणवत्ता/g, '<span class="conjunct-fix">गुणवत्ता</span>');
   };
 
   if (error) {
@@ -92,7 +80,9 @@ const Home = () => {
             <h2>⚠️ {isLoaded ? t('common.error') : 'Oops! Something went wrong'}</h2>
             <p className={getTextClassName()}>{error}</p>
             <button onClick={fetchData} className="btn btn-primary">
-              <span className={getTextClassName()}>{isLoaded ? t('common.tryAgain') : 'Try Again'}</span>
+              <span className={getTextClassName()}>
+                {isLoaded ? t('common.tryAgain') : 'Try Again'}
+              </span>
             </button>
           </div>
         </div>
@@ -104,7 +94,9 @@ const Home = () => {
     return (
       <div className="loading">
         <div className="spinner"></div>
-        <p className={getTextClassName()}>{isLoaded ? t('common.loading') : 'Loading...'}</p>
+        <p className={getTextClassName()}>
+          {isLoaded ? t('common.loading') : 'Loading...'}
+        </p>
       </div>
     );
   }
@@ -121,7 +113,9 @@ const Home = () => {
       <section className="hero">
         <div className="hero-overlay"></div>
         <div className="hero-content">
-          <h1 className={getTextClassName('hero-title', t('home.title'))}>{t('home.title')}</h1>
+          <h1 className={getTextClassName('hero-title', t('home.title'))}>
+            {t('home.title')}
+          </h1>
           <p className={getTextClassName('hero-subtitle', t('home.subtitle'))}>
             {t('home.subtitle')}
           </p>
@@ -130,10 +124,14 @@ const Home = () => {
           </p>
           <div className="hero-buttons">
             <Link to="/products" className="btn btn-primary btn-large">
-              <span className={getTextClassName('', t('home.browseProducts'))}>{t('home.browseProducts')}</span>
+              <span className={getTextClassName('', t('home.browseProducts'))}>
+                {t('home.browseProducts')}
+              </span>
             </Link>
             <Link to="/contact" className="btn btn-outline btn-large">
-              <span className={getTextClassName('', t('home.contactUs'))}>{t('home.contactUs')}</span>
+              <span className={getTextClassName('', t('home.contactUs'))}>
+                {t('home.contactUs')}
+              </span>
             </Link>
           </div>
         </div>
@@ -142,39 +140,86 @@ const Home = () => {
       {/* Features Section */}
       <section className="section features-section">
         <div className="container">
-          <h2 className={getTextClassName('section-title text-center', t('home.whyChoose.title'))}>{t('home.whyChoose.title')}</h2>
+          <h2
+            className={getTextClassName(
+              'section-title text-center',
+              t('home.whyChoose.title')
+            )}
+          >
+            {t('home.whyChoose.title')}
+          </h2>
           <div className="features-grid">
             <div className="feature-card">
-              <div className="feature-icon" aria-label="Quality Products">🌱</div>
-              <h3 className={getTextClassName('', t('home.whyChoose.quality.title'))}>{t('home.whyChoose.quality.title')}</h3>
-              <p className={getTextClassName('', t('home.whyChoose.quality.description'))}>{t('home.whyChoose.quality.description')}</p>
+              <div className="feature-icon">🌱</div>
+              <h3 className={getTextClassName('', t('home.whyChoose.quality.title'))}>
+                {t('home.whyChoose.quality.title')}
+              </h3>
+              <p
+                className={getTextClassName(
+                  '',
+                  t('home.whyChoose.quality.description')
+                )}
+              >
+                {t('home.whyChoose.quality.description')}
+              </p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon" aria-label="Organic Products">🌿</div>
-              <h3 className={getTextClassName('', t('home.whyChoose.organic.title'))}>{t('home.whyChoose.organic.title')}</h3>
-              <p className={getTextClassName('', t('home.whyChoose.organic.description'))}>{t('home.whyChoose.organic.description')}</p>
+              <div className="feature-icon">🌿</div>
+              <h3 className={getTextClassName('', t('home.whyChoose.organic.title'))}>
+                {t('home.whyChoose.organic.title')}
+              </h3>
+              <p
+                className={getTextClassName(
+                  '',
+                  t('home.whyChoose.organic.description')
+                )}
+              >
+                {t('home.whyChoose.organic.description')}
+              </p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon" aria-label="Competitive Prices">💰</div>
-              <h3 className={getTextClassName('', t('home.whyChoose.prices.title'))}>{t('home.whyChoose.prices.title')}</h3>
-              <p className={getTextClassName('', t('home.whyChoose.prices.description'))}>{t('home.whyChoose.prices.description')}</p>
+              <div className="feature-icon">💰</div>
+              <h3 className={getTextClassName('', t('home.whyChoose.prices.title'))}>
+                {t('home.whyChoose.prices.title')}
+              </h3>
+              <p
+                className={getTextClassName(
+                  '',
+                  t('home.whyChoose.prices.description')
+                )}
+              >
+                {t('home.whyChoose.prices.description')}
+              </p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon" aria-label="Fast Delivery">🚚</div>
-              <h3 className={getTextClassName('', t('home.whyChoose.delivery.title'))}>{t('home.whyChoose.delivery.title')}</h3>
-              <p className={getTextClassName('', t('home.whyChoose.delivery.description'))}>{t('home.whyChoose.delivery.description')}</p>
+              <div className="feature-icon">🚚</div>
+              <h3 className={getTextClassName('', t('home.whyChoose.delivery.title'))}>
+                {t('home.whyChoose.delivery.title')}
+              </h3>
+              <p
+                className={getTextClassName(
+                  '',
+                  t('home.whyChoose.delivery.description')
+                )}
+              >
+                {t('home.whyChoose.delivery.description')}
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Products */}
+      {/* Featured Products Section */}
       <section className="section bg-light-beige">
         <div className="container">
           <div className="section-header">
-            <h2 className={getTextClassName('section-title', t('home.featuredProducts.title'))}>{t('home.featuredProducts.title')}</h2>
+            <h2 className={getTextClassName('section-title', t('home.featuredProducts.title'))}>
+              {t('home.featuredProducts.title')}
+            </h2>
             <Link to="/products" className="btn btn-secondary">
-              <span className={getTextClassName('', t('home.featuredProducts.viewAll'))}>{t('home.featuredProducts.viewAll')}</span>
+              <span className={getTextClassName('', t('home.featuredProducts.viewAll'))}>
+                {t('home.featuredProducts.viewAll')}
+              </span>
             </Link>
           </div>
 
@@ -182,35 +227,44 @@ const Home = () => {
             <div className="products-grid">
               {featuredProducts.map((product) => {
                 const formattedPrice = formatPrice(product.price, product.unit);
-                
                 return (
                   <div key={product._id} className="product-card card">
-                    <div className="product-badge">
-                      {product.isOrganic && <span className={getTextClassName('badge-organic', t('home.featuredProducts.organic'))}>🌿 {t('home.featuredProducts.organic')}</span>}
-                    </div>
-                    <Link to={`/products/${product._id}`} aria-label={`View details for ${product.name}`}>
+                    {product.isOrganic && (
+                      <div className="product-badge">
+                        <span className={getTextClassName('badge-organic')}>
+                          🌿 {t('home.featuredProducts.organic')}
+                        </span>
+                      </div>
+                    )}
+                    <Link to={`/products/${product._id}`}>
                       <img
                         src={product.image}
                         alt={product.name}
                         className="product-image"
                         loading="lazy"
                         onError={(e) => {
-                          e.target.src = 'https://via.placeholder.com/400x300?text=Product+Image';
+                          e.target.src =
+                            'https://via.placeholder.com/400x300?text=Product+Image';
                         }}
                       />
                     </Link>
                     <div className="product-info">
-                      <h3 className={getTextClassName('product-name', product.name)}>{product.name}</h3>
+                      <h3 className={getTextClassName('product-name', product.name)}>
+                        {product.name}
+                      </h3>
                       <p className={getTextClassName('product-description', product.description)}>
-                        {product.description.length > 100 
-                          ? `${product.description.substring(0, 100)}...` 
-                          : product.description
-                        }
+                        {product.description.length > 100
+                          ? `${product.description.substring(0, 100)}...`
+                          : product.description}
                       </p>
                       <div className="product-footer">
-                        <span className={getTextClassName('product-price')}>{formattedPrice}</span>
+                        <span className={getTextClassName('product-price')}>
+                          {formattedPrice}
+                        </span>
                         <Link to={`/products/${product._id}`} className="btn-link">
-                          <span className={getTextClassName('', t('home.featuredProducts.viewDetails'))}>{t('home.featuredProducts.viewDetails')}</span>
+                          <span className={getTextClassName('', t('home.featuredProducts.viewDetails'))}>
+                            {t('home.featuredProducts.viewDetails')}
+                          </span>
                         </Link>
                       </div>
                     </div>
@@ -220,110 +274,67 @@ const Home = () => {
             </div>
           ) : (
             <div className="no-data">
-              <p className={getTextClassName('no-data')}>No featured products available at the moment.</p>
+              <p className={getTextClassName('no-data')}>
+                No featured products available at the moment.
+              </p>
             </div>
           )}
         </div>
       </section>
 
-      {/* Services Preview */}
-      <section className="section">
-        <div className="container">
-          <div className="section-header">
-            <h2 className={getTextClassName('section-title', t('home.services.title'))}>{t('home.services.title')}</h2>
-            <Link to="/services" className="btn btn-secondary">
-              <span className={getTextClassName('', t('home.services.viewAll'))}>{t('home.services.viewAll')}</span>
-            </Link>
-          </div>
-
-          {services.length > 0 ? (
-            <div className="services-grid">
-              {services.map((service) => {
-                const servicePrice = service.price ? formatPrice(service.price, null, { showUnit: false }) : null;
-                
-                return (
-                  <div key={service._id} className="service-card card">
-                    <div className="service-icon-large" aria-label={service.title}>{service.icon}</div>
-                    <h3 className={getTextClassName('service-title', service.title)}>{service.title}</h3>
-                    <p className={getTextClassName('service-description', service.description)}>{service.description}</p>
-                    <div className="service-meta">
-                      <span className={getTextClassName('service-duration')}>⏱️ {service.duration || t('home.services.onRequest')}</span>
-                      {servicePrice && <span className={getTextClassName('service-price')}>{servicePrice}</span>}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          ) : (
-            <div className="services-grid">
-              <div className="service-card card">
-                <div className="service-icon-large" aria-label="Farming Workshops">🎓</div>
-                <h3 className={getTextClassName('service-title')}>Farming Workshops</h3>
-                <p className={getTextClassName('service-description', t('home.services.workshops'))}>{t('home.services.workshops')}</p>
-                <div className="service-meta">
-                  <span className={getTextClassName('service-duration')}>⏱️ {t('home.services.onRequest')}</span>
-                </div>
-              </div>
-              <div className="service-card card">
-                <div className="service-icon-large" aria-label="Weather Advisory">🌤️</div>
-                <h3 className={getTextClassName('service-title')}>Weather Advisory</h3>
-                <p className={getTextClassName('service-description', t('home.services.weather'))}>{t('home.services.weather')}</p>
-                <div className="service-meta">
-                  <span className={getTextClassName('service-duration')}>⏱️ {t('home.services.onRequest')}</span>
-                </div>
-              </div>
-              <div className="service-card card">
-                <div className="service-icon-large" aria-label="Crop Diagnosis">🔬</div>
-                <h3 className={getTextClassName('service-title')}>Crop Diagnosis</h3>
-                <p className={getTextClassName('service-description', t('home.services.diagnosis'))}>{t('home.services.diagnosis')}</p>
-                <div className="service-meta">
-                  <span className={getTextClassName('service-duration')}>⏱️ {t('home.services.onRequest')}</span>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Enhanced Testimonials Section with Better Conjunct Handling */}
+      {/* Testimonials */}
       <section className="section bg-cream testimonials-section">
         <div className="container">
-          <h2 className={getTextClassName('section-title text-center heading-marathi', t('home.testimonials.title'))}>{t('home.testimonials.title')}</h2>
+          <h2 className={getTextClassName('section-title text-center heading-marathi', t('home.testimonials.title'))}>
+            {t('home.testimonials.title')}
+          </h2>
           <div className="testimonials-grid">
             <div className="testimonial-card">
-              <div className="testimonial-rating" aria-label="5 star rating">⭐⭐⭐⭐⭐</div>
-              <p className="testimonial-text ultra-complex-conjuncts complex-conjuncts-critical">
-                “कन्हैया कृषी केंद्रातील जैविक बियाणे वापरल्यानंतर माझ्या पिकाचे उत्पादन खूप वाढले आहे. खरंच उत्तम <span className=\"conjunct-fix\">गुणवत्ता</span>!”
+              <div className="testimonial-rating">⭐⭐⭐⭐⭐</div>
+              <p className="testimonial-text ultra-complex-conjuncts">
+                कन्हैया कृषी केंद्रातील जैविक बियाणे वापरल्यानंतर माझ्या पिकाचे उत्पादन खूप वाढले आहे. खरंच उत्तम{' '}
+                <span className="conjunct-fix">गुणवत्ता</span>!
               </p>
               <div className="testimonial-author">
                 <strong className="ultra-complex-conjuncts">ज्योतिराम जाधव</strong>
-                <span className="complex-conjuncts-critical">शेतकरी - करमाळा, <span className="word-maharashtra force-conjunct-fix">महाराष्ट्र</span></span>
+                <span className="complex-conjuncts-critical">
+                  शेतकरी - करमाळा, <span className="word-maharashtra force-conjunct-fix">महाराष्ट्र</span>
+                </span>
               </div>
             </div>
+
             <div className="testimonial-card">
-              <div className="testimonial-rating" aria-label="5 star rating">⭐⭐⭐⭐⭐</div>
+              <div className="testimonial-rating">⭐⭐⭐⭐⭐</div>
               <p className="testimonial-text ultra-complex-conjuncts">
-                “येथील खते आणि कीटकनाशके खूप चांगल्या दर्जाची आहेत. त्यांची मातीची तपासणी <span className=\"conjunct-fix\">सेवा</span> अतिशय उपयुक्त आहे.”
+                येथील खते आणि कीटकनाशके खूप चांगल्या दर्जाची आहेत. त्यांची मातीची तपासणी{' '}
+                <span className="conjunct-fix">सेवा</span> अतिशय उपयुक्त आहे.
               </p>
               <div className="testimonial-author">
                 <strong className="ultra-complex-conjuncts">नागनाथ नाईकनवरे</strong>
-                <span className="complex-conjuncts-critical">शेतकरी - माढा, <span className="word-maharashtra force-conjunct-fix">महाराष्ट्र</span></span>
+                <span className="complex-conjuncts-critical">
+                  शेतकरी - माढा, <span className="word-maharashtra force-conjunct-fix">महाराष्ट्र</span>
+                </span>
               </div>
             </div>
+
             <div className="testimonial-card">
-              <div className="testimonial-rating" aria-label="5 star rating">⭐⭐⭐⭐⭐</div>
+              <div className="testimonial-rating">⭐⭐⭐⭐⭐</div>
               <p className="testimonial-text ultra-complex-conjuncts">
-                “वेळेवर डिलिव्हरी आणि खूप चांगली <span className=\"conjunct-fix\">सेवा</span>. <span className=\"complex-conjuncts-critical\">शेतकऱ्यांची</span> खरी काळजी घेतात ते येथे.”
+                वेळेवर डिलिव्हरी आणि खूप चांगली <span className="conjunct-fix">सेवा</span>.{' '}
+                <span className="complex-conjuncts-critical">शेतकऱ्यांची</span> खरी काळजी घेतात ते येथे.
               </p>
               <div className="testimonial-author">
                 <strong className="ultra-complex-conjuncts">गणेश पोळ</strong>
-                <span className="complex-conjuncts-critical">शेतकरी, <span className="word-maharashtra force-conjunct-fix">महाराष्ट्र</span></span>
+                <span className="complex-conjuncts-critical">
+                  शेतकरी, <span className="word-maharashtra force-conjunct-fix">महाराष्ट्र</span>
+                </span>
               </div>
             </div>
+
             <div className="testimonial-card">
-              <div className="testimonial-rating" aria-label="5 star rating">⭐⭐⭐⭐⭐</div>
+              <div className="testimonial-rating">⭐⭐⭐⭐⭐</div>
               <p className="testimonial-text">
-                “Best quality fertilizers at reasonable prices. Their soil testing service is excellent.”
+                Best quality fertilizers at reasonable prices. Their soil testing service is excellent.
               </p>
               <div className="testimonial-author">
                 <strong>Priya Sharma</strong>
@@ -337,12 +348,16 @@ const Home = () => {
       {/* CTA Section */}
       <section className="section cta-section">
         <div className="container text-center">
-          <h2 className={getTextClassName('cta-title heading-marathi', t('home.testimonials.readyToGrow'))}>{t('home.testimonials.readyToGrow')}</h2>
+          <h2 className={getTextClassName('cta-title heading-marathi', t('home.testimonials.readyToGrow'))}>
+            {t('home.testimonials.readyToGrow')}
+          </h2>
           <p className={getTextClassName('cta-text', t('home.testimonials.joinFarmers'))}>
             {t('home.testimonials.joinFarmers')}
           </p>
           <Link to="/contact" className="btn btn-primary btn-large">
-            <span className={getTextClassName('btn-marathi', t('home.testimonials.getStarted'))}>{t('home.testimonials.getStarted')}</span>
+            <span className={getTextClassName('btn-marathi', t('home.testimonials.getStarted'))}>
+              {t('home.testimonials.getStarted')}
+            </span>
           </Link>
         </div>
       </section>
