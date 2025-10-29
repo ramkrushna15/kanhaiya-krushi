@@ -81,7 +81,7 @@ const Home = () => {
       .replace(/तज्ज्ञांचे/g, '<span class="ultra-complex-conjuncts">तज्ज्ञांचे</span>')
       .replace(/स्पर्धात्मक/g, '<span class="complex-conjuncts-critical">स्पर्धात्मक</span>')
       .replace(/नैसर्गिक/g, '<span class="conjunct-fix">नैसर्गिक</span>')
-      .replace /गुणवत्ता/g, '<span class="conjunct-fix">गुणवत्ता</span>');
+      .replace(/गुणवत्ता/g, '<span class="conjunct-fix">गुणवत्ता</span>');
   };
 
   if (error) {
@@ -293,7 +293,7 @@ const Home = () => {
             <div className="testimonial-card">
               <div className="testimonial-rating" aria-label="5 star rating">⭐⭐⭐⭐⭐</div>
               <p className="testimonial-text ultra-complex-conjuncts complex-conjuncts-critical">
-                "कन्हैया कृषी केंद्रातील जैविक बियाणे वापरल्यानंतर माझ्या पिकाचे उत्पादन खूप वाढले आहे. खरंच उत्तम <span className="conjunct-fix">गुणवत्ता</span>!"
+                "कन्हैया कृषी केंद्रातील जैविक बियाणे वापरल्यानंतर माझ्या पिकाचे उत्पादन खूप वाढले आहे. खरंच उत्तम <span className=\"conjunct-fix\">गुणवत्ता</span>!"
               </p>
               <div className="testimonial-author">
                 <strong className="ultra-complex-conjuncts">ज्योतिराम जाधव</strong>
@@ -303,7 +303,7 @@ const Home = () => {
             <div className="testimonial-card">
               <div className="testimonial-rating" aria-label="5 star rating">⭐⭐⭐⭐⭐</div>
               <p className="testimonial-text ultra-complex-conjuncts">
-                "येथील खते आणि कीटकनाशके खूप चांगल्या दर्जाची आहेत. त्यांची मातीची तपासणी <span className="conjunct-fix">सेवा</span> अतिशय उपयुक्त आहे."
+                "येथील खते आणि कीटकनाशके खूप चांगल्या दर्जाची आहेत. त्यांची मातीची तपासणी <span className=\"conjunct-fix\">सेवा</span> अतिशय उपयुक्त आहे."
               </p>
               <div className="testimonial-author">
                 <strong className="ultra-complex-conjuncts">नागनाथ नाईकनवरे</strong>
@@ -313,7 +313,7 @@ const Home = () => {
             <div className="testimonial-card">
               <div className="testimonial-rating" aria-label="5 star rating">⭐⭐⭐⭐⭐</div>
               <p className="testimonial-text ultra-complex-conjuncts">
-                "वेळेवर डिलिव्हरी आणि खूप चांगली <span className="conjunct-fix">सेवा</span>. <span className="complex-conjuncts-critical">शेतकऱ्यांची</span> खरी काळजी घेतात ते येथे."
+                "वेळेवर डिलिव्हरी आणि खूप चांगली <span className=\"conjunct-fix\">सेवा</span>. <span className=\"complex-conjuncts-critical\">शेतकऱ्यांची</span> खरी काळजी घेतात ते येथे."
               </p>
               <div className="testimonial-author">
                 <strong className="ultra-complex-conjuncts">गणेश पोळ</strong>
