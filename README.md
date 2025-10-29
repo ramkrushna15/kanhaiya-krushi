@@ -1,183 +1,133 @@
-# Kanhaiya Krushi - Sustainable Agriculture Website
+# Kanhaiya Krushi
 
-A modern, full-stack agriculture e-commerce website built with React, Node.js, Express, and MongoDB.
+A bilingual (Marathi + English) agriculture website for Kanhaiya Krushi Seva Kendra. Built with React (client) and Node/Express + MongoDB (server). Includes product listings, a contact form with email notifications, and localization support.
 
-## 🌾 Features
+## Features
 
-- **Modern UI/UX**: Clean, responsive design with smooth animations
-- **Product Catalog**: Browse seeds, fertilizers, pesticides, and farming equipment
-- **Services Section**: Agricultural consultation and expert services
-- **Contact Form**: Easy communication with integrated form handling
-- **Mobile Responsive**: Optimized for all device sizes
-- **SEO Friendly**: Proper meta tags and semantic HTML
+- Bilingual UI: Marathi and English with centralized translation file
+- Contact Form: Saves submissions to MongoDB and sends email notifications
+- Clean architecture: separate client and server folders
+- Production-ready deploy script
+- Secure by default: environment variables are not committed
 
-## 🚀 Tech Stack
+## Tech Stack
 
-### Frontend
-- React 19.2.0
-- React Router DOM 7.9.4
-- Axios for API calls
-- Framer Motion for animations
-- React Icons
+- Client: React, React Router
+- Server: Node.js, Express
+- Database: MongoDB (Mongoose)
+- Email: Nodemailer (SMTP)
+- i18n: translations.js
 
-### Backend
-- Node.js
-- Express 5.1.0
-- MongoDB with Mongoose 8.19.1
-- CORS enabled
-- Express Validator
-
-## 📦 Installation
-
-### Prerequisites
-- Node.js (v16 or higher)
-- MongoDB installed and running
-- npm or yarn package manager
-
-### Clone the Repository
-```bash
-git clone <your-repo-url>
-cd agriculture-website
-```
-
-### Backend Setup
-```bash
-cd server
-npm install
-
-# Create .env file
-echo "MONGODB_URI=mongodb://localhost:27017/kanhaiya_krushi_db
-PORT=5000
-NODE_ENV=development" > .env
-
-# Seed the database with sample data
-node seed.js
-
-# Start the server
-npm run dev
-```
-
-### Frontend Setup
-```bash
-cd client
-npm install
-
-# Start the development server
-npm start
-```
-
-The application will open at `http://localhost:3000`
-
-## 🗂️ Project Structure
+## Repository Structure
 
 ```
-agriculture-website/
-├── client/                 # React frontend
+kanhaiya-krushi/
+├── .gitignore
+├── README.md
+├── package.json
+├── client/
+│   ├── .env.production
+│   ├── BILINGUAL_SETUP.md
+│   ├── deploy.sh
+│   ├── package.json
 │   ├── public/
-│   │   ├── index.html
-│   │   └── manifest.json
-│   ├── src/
-│   │   ├── components/    # Reusable components
-│   │   │   ├── Navbar.jsx
-│   │   │   ├── Navbar.css
-│   │   │   ├── Footer.jsx
-│   │   │   └── Footer.css
-│   │   ├── pages/         # Page components
-│   │   │   ├── Home.jsx
-│   │   │   ├── About.jsx
-│   │   │   ├── Products.jsx
-│   │   │   ├── Services.jsx
-│   │   │   └── Contact.jsx
-│   │   ├── services/      # API services
-│   │   │   └── api.js
-│   │   ├── App.js
-│   │   ├── App.css
-│   │   ├── index.js
-│   │   └── index.css
-│   └── package.json
-│
-└── server/                # Node.js backend
-    ├── models/           # MongoDB models
-    │   ├── Product.js
-    │   └── Service.js
-    ├── routes/           # API routes
-    │   ├── productRoutes.js
-    │   ├── serviceRoutes.js
-    │   └── contactRoutes.js
-    ├── seed.js          # Database seeding script
-    ├── server.js        # Main server file
+│   └── src/
+└── server/
+    ├── .env.example
+    ├── models/
+    ├── routes/
+    ├── seed.js
+    ├── server.js
     └── package.json
 ```
 
-## 🎨 Customization
+## Local Setup
 
-### Change Logo
-Replace the emoji icon (🌾) in the following files:
-- `client/src/components/Navbar.jsx`
-- `client/src/components/Footer.jsx`
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/ramkrushna15/kanhaiya-krushi.git
+   cd kanhaiya-krushi
+   ```
 
-Or add an actual logo image:
-```jsx
-<img src="/path/to/logo.png" alt="Kanhaiya Krushi" className="logo-image" />
+2. Install dependencies:
+   ```bash
+   npm install
+   cd client && npm install
+   cd ../server && npm install
+   ```
+
+3. Environment variables:
+   - Server:
+     ```bash
+     cd server
+     cp .env.example .env
+     # Edit .env with your values
+     ```
+   - Client:
+     ```bash
+     cd ../client
+     # Create if not present
+     # Windows: New-Item -ItemType File -Name ".env"
+     # Mac/Linux: touch .env
+     ```
+     Example client/.env:
+     ```env
+     REACT_APP_API_URL=http://localhost:5000
+     REACT_APP_API_BASE_URL=http://localhost:5000/api
+     GENERATE_SOURCEMAP=false
+     ```
+
+4. Run locally:
+   - Server:
+     ```bash
+     cd server
+     npm start
+     ```
+   - Client:
+     ```bash
+     cd client
+     npm start
+     ```
+
+## Email Configuration (Server)
+
+Edit `server/.env`:
+```env
+EMAIL_USER=info@kanhaiyakrushi.com
+EMAIL_PASS=your-email-app-password
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_FROM=noreply@kanhaiyakrushi.com
 ```
 
-### Update Contact Details
-Edit the contact information in:
-- `client/src/pages/Contact.jsx`
-- `client/src/components/Footer.jsx`
+The contact form route uses `nodemailer.createTransport` in `server/routes/contactRoutes.js`.
 
-### Change Colors
-Modify CSS variables in `client/src/index.css`:
-```css
-:root {
-  --primary-green: #2d5016;
-  --accent-green: #4a7c2c;
-  --wheat-gold: #f9a825;
-  /* ... other colors */
-}
-```
+## Translations
 
-## 📝 API Endpoints
+- File: `client/src/translations/translations.js`
+- Usage: Components read keys instead of hardcoded text to support Marathi and English
 
-### Products
-- `GET /api/products/get-products` - Get all products
-- `GET /api/products/get-products?category=Seeds` - Filter by category
-- `GET /api/products/get-products?featured=true` - Get featured products
-- `GET /api/products/:id` - Get single product
-- `POST /api/products` - Create new product
+## Deployment
 
-### Services
-- `GET /api/services/get-services` - Get all services
-- `GET /api/services/:id` - Get single service
-- `POST /api/services` - Create new service
+- Script: `client/deploy.sh`
+- Production client variables: `client/.env.production`
+- Set all server env variables on the hosting platform (do not upload `.env`)
 
-### Contact
-- `POST /api/contact` - Submit contact form
-- `GET /api/contact` - Get all contact submissions
+## Security
 
-## 🌟 Features to Add
+- `.env` files are intentionally excluded from the repo via `.gitignore`
+- Use different secrets for development and production
+- Never place secrets in client `.env` (anything in client is public)
 
-- [ ] User authentication
-- [ ] Shopping cart
-- [ ] Order management
-- [ ] Payment integration
-- [ ] Admin dashboard
-- [ ] Product reviews
-- [ ] Image upload for products
-- [ ] Email notifications
+## Troubleshooting
 
-## 🤝 Contributing
+- Nodemailer error “createTransporter is not a function”
+  - Fixed by using `createTransport` in `server/routes/contactRoutes.js`
+- Merge conflicts after cleanup
+  - Remove unmerged `server/.env`, commit, then `git pull`
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+## Contact
 
-## 📄 License
-
-This project is licensed under the ISC License.
-
-## 👨‍💻 Developer
-
-Developed with ❤️ for sustainable agriculture
-
-## 📞 Support
-
-For support, email info@kanhaiyakrushi.com or visit our contact page.
+- Website: kanhaiyakrushi.com
+- Email: info@kanhaiyakrushi.com
+- WhatsApp: +91 97670 38479
