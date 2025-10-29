@@ -1,3 +1,6 @@
+/* Import critical conjunct fixes for Marathi text */
+@import './conjunct-fix.css';
+
 .App {
   text-align: center;
 }
