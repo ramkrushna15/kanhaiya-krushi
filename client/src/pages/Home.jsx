@@ -44,7 +44,7 @@ const Home = () => {
   const getTextClassName = (additionalClasses = '', text = '') => {
     if (language !== 'mr') return additionalClasses;
 
-    let baseClass = 'marathi-text';
+    let baseClass = 'ultra-complex-conjuncts';
 
     if (
       text &&
@@ -56,7 +56,7 @@ const Home = () => {
         text.includes('र्धा'))
     ) {
       baseClass =
-        'ultra-complex-conjuncts maharashtra-fix complex-conjuncts-critical';
+        'ultra-complex-conjuncts maharashtra-fix complex-conjuncts-critical force-conjunct-fix';
     } else if (
       text &&
       (text.includes('नैसर्गिक') ||
@@ -66,7 +66,7 @@ const Home = () => {
         text.includes('केंद्रा') ||
         text.includes('शेतकरी'))
     ) {
-      baseClass = 'complex-conjuncts conjunct-fix';
+      baseClass = 'ultra-complex-conjuncts complex-conjuncts-critical conjunct-fix';
     }
 
     return `${baseClass} ${additionalClasses}`.trim();
