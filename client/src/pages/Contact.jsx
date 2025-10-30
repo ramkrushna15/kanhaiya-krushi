@@ -38,7 +38,9 @@ const Contact = () => {
       newErrors.email = t('contact.validation.emailInvalid');
     }
 
-    if (formData.phone && !/^[\d\s\+\-\(\)]+$/.test(formData.phone)) {
+    // Updated phone validation to allow common formatting characters and ignore empty optional field
+    const phoneRegex = /^[\d\s\+\-\(\)]+$/;
+    if (formData.phone && formData.phone.length > 0 && !phoneRegex.test(formData.phone)) {
       newErrors.phone = t('contact.validation.phoneInvalid');
     }
 
