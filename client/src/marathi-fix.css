@@ -1,13 +1,5 @@
 /* Professional Marathi Typography - Inspired by FarmSchool's Best Practices */
 
-/* Import the most professional Devanagari fonts with comprehensive character support */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Marathi:ital,wght@0,400;1,400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Mukti:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Eczar:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Samarkan&display=swap');
-
 /* Professional global Marathi text configuration */
 .marathi-text,
 [lang="mr"],
