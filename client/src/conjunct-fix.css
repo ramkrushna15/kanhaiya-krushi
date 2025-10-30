@@ -2,11 +2,6 @@
  * This file specifically targets problematic conjuncts like महाराष्ट्र, तज्ज्ञांचे, स्पर्धात्मक
  */
 
-/* Critical font imports with highest priority for conjunct rendering */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Marathi:ital,wght@0,400;1,400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
-
 /* Ultra-high priority conjunct fixes for testimonials and critical text */
 .testimonial-card .testimonial-text,
 .testimonial-card .testimonial-author,
