@@ -3,11 +3,14 @@ import SEO from '../components/SEO';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getServices } from '../services/api';
+import { useTranslation } from '../hooks/useTranslation';
 import './Services.css';
 
 const Services = () => {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { t, isLoaded } = useTranslation();
 
   useEffect(() => {
     fetchServices();
@@ -15,19 +18,45 @@ const Services = () => {
 
   const fetchServices = async () => {
     try {
+      setLoading(true);
+      setError(null);
       const response = await getServices();
       setServices(response.data.data);
-      setLoading(false);
     } catch (error) {
       console.error('Error fetching services:', error);
+      setError(
+        isLoaded
+          ? t('common.error')
+          : 'Unable to load services. Please check your connection and try again.'
+      );
+    } finally {
       setLoading(false);
     }
   };
 
-  if (loading) {
+  // Handle error state
+  if (error) {
+    return (
+      <div className="error-container">
+        <div className="container">
+          <div className="error-content">
+            <h2>⚠️ {isLoaded ? t('common.error') : 'Oops! Something went wrong'}</h2>
+            <p>{error}</p>
+            <button onClick={fetchServices} className="btn btn-primary">
+              {isLoaded ? t('common.tryAgain') : 'Try Again'}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Enhanced loading state with translation support
+  if (loading || !isLoaded) {
     return (
       <div className="loading">
         <div className="spinner"></div>
+        <p>{isLoaded ? t('common.loading') : 'Loading services...'}</p>
       </div>
     );
   }
@@ -50,42 +79,48 @@ const Services = () => {
       {/* Services Grid */}
       <section className="section">
         <div className="container">
-          <div className="services-grid">
-            {services.map((service) => (
-              <div key={service._id} className="service-card-large card">
-                <div className="service-icon-wrapper">
-                  <span className="service-icon-huge">{service.icon}</span>
-                </div>
-                <h3 className="service-title-large">{service.title}</h3>
-                <p className="service-description-large">{service.description}</p>
-
-                {service.features && service.features.length > 0 && (
-                  <ul className="service-features-list">
-                    {service.features.map((feature, index) => (
-                      <li key={index}>✓ {feature}</li>
-                    ))}
-                  </ul>
-                )}
-
-                <div className="service-details">
-                  <div className="service-detail-item">
-                    <span className="detail-label">Duration:</span>
-                    <span className="detail-value">{service.duration}</span>
+          {services.length > 0 ? (
+            <div className="services-grid">
+              {services.map((service) => (
+                <div key={service._id} className="service-card-large card">
+                  <div className="service-icon-wrapper">
+                    <span className="service-icon-huge">{service.icon}</span>
                   </div>
-                  {service.price && (
-                    <div className="service-detail-item">
-                      <span className="detail-label">Starting from:</span>
-                      <span className="detail-value-price">₹{service.price}</span>
-                    </div>
-                  )}
-                </div>
+                  <h3 className="service-title-large">{service.title}</h3>
+                  <p className="service-description-large">{service.description}</p>
 
-                <Link to="/contact" className="btn btn-primary btn-block">
-                  Book Service
-                </Link>
-              </div>
-            ))}
-          </div>
+                  {service.features && service.features.length > 0 && (
+                    <ul className="service-features-list">
+                      {service.features.map((feature, index) => (
+                        <li key={index}>✓ {feature}</li>
+                      ))}
+                    </ul>
+                  )}
+
+                  <div className="service-details">
+                    <div className="service-detail-item">
+                      <span className="detail-label">Duration:</span>
+                      <span className="detail-value">{service.duration}</span>
+                    </div>
+                    {service.price && (
+                      <div className="service-detail-item">
+                        <span className="detail-label">Starting from:</span>
+                        <span className="detail-value-price">₹{service.price}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <Link to="/contact" className="btn btn-primary btn-block">
+                    Book Service
+                  </Link>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="no-data">
+              <p>No services available at the moment.</p>
+            </div>
+          )}
         </div>
       </section>
 
